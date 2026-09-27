@@ -1,0 +1,84 @@
+/* ==========================================================================
+   LuxeStay - Design System Tokens & CSS Variables
+   Revised: Light, Formal, Professional & Modern Luxury Theme
+   ========================================================================== */
+
+:root {
+  /* --- Brand Colors (Light Warm Alabaster, Crisp White & Refined Gold) --- */
+  --color-bg: #FAF8F5;                     /* Warm Alabaster / Soft Linen (Main Canvas) */
+  --color-bg-alt: #F3EFE9;                 /* Subtly warmer tone for alternating sections */
+  --color-surface: #FFFFFF;                /* Pure Crisp White (Cards, Dropdowns, Modals) */
+  --color-surface-hover: #FCFBFA;          /* Subtle hover state for cards */
+  
+  /* Light Glassmorphism */
+  --color-surface-glass: rgba(255, 255, 255, 0.94);
+  --color-surface-glass-border: rgba(165, 131, 56, 0.22);
+  --color-surface-glass-shadow: 0 10px 30px rgba(28, 34, 41, 0.06);
+
+  /* Gold & Champagne Accents (Formal, Understated & Refined) */
+  --color-gold: #9E7D3B;                   /* Formal Antique Gold */
+  --color-gold-light: #B8964C;             /* Hover Gold */
+  --color-gold-dark: #7F632C;              /* Active / Pressed Gold */
+  --color-gold-soft: #F6F1E6;              /* Soft Warm Champagne Background Tint */
+  --color-gold-glow: rgba(158, 125, 59, 0.12);
+
+  /* Formal Typography Colors (High contrast, clean readability) */
+  --color-text-primary: #1C2229;           /* Deep Charcoal Slate (Main Headings & Titles) */
+  --color-text-secondary: #4D5763;         /* Balanced Slate (Body text & descriptions) */
+  --color-text-muted: #7E8B97;             /* Subtle metadata, dates & secondary labels */
+  --color-text-gold: #8E6F32;              /* Warm text highlight */
+
+  /* Clean Borders */
+  --color-border: #E8E3DA;                 /* Standard subtle card/divider border */
+  --color-border-subtle: #F0ECE4;          /* Ultra light line */
+  --color-border-gold: rgba(158, 125, 59, 0.35);
+
+  /* Functional Colors */
+  --color-success: #2A9D8F;
+  --color-available: #2E7D32;
+  --color-few-left: #C85A32;
+
+  /* --- Typography --- */
+  --font-serif: 'Cormorant Garamond', Garamond, 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Font Weights */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* --- Spacing Scale --- */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4.5rem;   /* 72px */
+  --space-4xl: 6rem;     /* 96px */
+
+  /* --- Border Radius --- */
+  --radius-xs: 2px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* --- Natural Soft Shadows --- */
+  --shadow-subtle: 0 2px 10px rgba(28, 34, 41, 0.04);
+  --shadow-card: 0 8px 25px rgba(28, 34, 41, 0.05);
+  --shadow-hover: 0 16px 36px rgba(28, 34, 41, 0.09);
+  --shadow-nav: 0 4px 20px rgba(28, 34, 41, 0.04);
+  --shadow-modal: 0 20px 50px rgba(28, 34, 41, 0.18);
+
+  /* --- Transitions --- */
+  --transition-fast: 0.18s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* --- Layout Dimensions --- */
+  --container-max-width: 1240px;
+  --header-height: 84px;
+}

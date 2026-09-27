@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FARM RESORT. AKILI | Gram Panchayat 5-Cottage Hospitality Project</title>
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FARM RESORT. AKILI Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/modal.css">
+
+  <!-- Application Bootstrap -->
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       Top Professional Header & Navigation
+       ========================================================================== -->
+  <header class="site-header" id="top-header">
+    <div class="container header-container">
+      
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo" aria-label="FARM RESORT. AKILI">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 4 13C4 8.5 8 3 13 3c5.5 0 7 2.5 7 7a7 7 0 0 1-7 7l-2 3z"></path>
+            <path d="M11 13a3.5 3.5 0 0 0 5-5"></path>
+          </svg>
+        </span>
+        <div class="brand-text-block">
+          <span class="brand-title">FARM RESORT<span class="brand-dot">.</span> AKILI</span>
+          <span class="brand-subtitle">Gram Panchayat Tourism Project &bull; 5 Cottages</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav aria-label="Main Navigation">
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#hero" class="nav-link">Home</a></li>
+          <li><a href="#cottages-section" class="nav-link">Cottages</a></li>
+          <li><a href="#availability-section" class="nav-link">Availability</a></li>
+          <li><a href="#menu-section" class="nav-link">Menu</a></li>
+          <li><a href="#booking-section" class="nav-link">Booking</a></li>
+          <li><a href="#facilities-section" class="nav-link">Facilities</a></li>
+          <li><a href="#gallery-section" class="nav-link">Gallery</a></li>
+          <li><a href="#contact-section" class="nav-link">Location &amp; Contact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+        <a href="admin.html" class="btn btn-outline btn-sm" title="Go to Staff/Admin Demonstration Portal">
+          ⚙️ Admin Portal
+        </a>
+        <a href="#booking-section" class="btn btn-primary btn-sm">
+          Book a Cottage
+        </a>
+
+        <!-- Mobile Menu Hamburger Button -->
+        <button class="nav-toggle-btn" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          ☰
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         Hero Section: Formal, Community-Focused & Welcoming
+         ========================================================================== -->
+    <section class="hotel-hero" id="hero">
+      <div class="container hero-inner">
+        
+        <!-- Location & Project Pill -->
+        <div class="hero-location-pill">
+          <span>🏛️ Gram Panchayat Community Tourism Initiative &bull; Exactly 5 Cottages</span>
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero-heading">FARM RESORT. AKILI</h1>
+
+        <!-- Subtitle -->
+        <p class="hero-subtitle">
+          A disciplined, community-managed guest house featuring <strong>5 private cottages</strong>, safe gated campus, daily sanitized rooms, in-house vegetarian Bhojanalaya, and 24/7 power &amp; water backup for visitors, pilgrims, and officials.
+        </p>
+
+        <!-- Hero CTAs -->
+        <div class="hero-cta-group">
+          <a href="#booking-section" class="btn btn-primary btn-lg">Book a Cottage</a>
+          <a href="#availability-section" class="btn btn-dark btn-lg">Check Date-Based Availability</a>
+          <a href="#menu-section" class="btn btn-outline btn-lg">View Food Menu</a>
+        </div>
+
+        <!-- Micro-Features Strip -->
+        <div class="hero-highlights">
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">🏡</span>
+            <span>Total 5 Cottages on Campus</span>
+          </div>
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">📅</span>
+            <span>Date-Based Overlap Availability</span>
+          </div>
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">⚡</span>
+            <span>Generator Power Backup</span>
+          </div>
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">🍲</span>
+            <span>Fresh Vegetarian Meals</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROMINENT SECTION: Live Cottage Availability (Date-Based)
+         ========================================================================== -->
+    <section class="container content-section" id="availability-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Date-Range Overlap Engine</span>
+        <h2 class="section-title">Cottage Availability by Dates</h2>
+        <p class="section-subtitle">
+          Select your check-in and check-out dates to see real-time availability across all 5 cottages.
+        </p>
+      </div>
+
+      <!-- Date Selection Bar for Availability -->
+      <div class="white-card" style="margin-bottom: var(--space-xl); padding: var(--space-lg); border-top: 3px solid var(--color-gold);">
+        <form id="avail-date-filter-form" style="display: flex; align-items: flex-end; gap: var(--space-md); flex-wrap: wrap;">
+          <div class="form-group" style="flex: 1; min-width: 180px;">
+            <label for="avail-checkin" class="form-label">Check-In Date</label>
+            <input type="date" id="avail-checkin" class="form-input" required />
+          </div>
+
+          <div class="form-group" style="flex: 1; min-width: 180px;">
+            <label for="avail-checkout" class="form-label">Check-Out Date</label>
+            <input type="date" id="avail-checkout" class="form-input" required />
+          </div>
+
+          <div style="flex: 0 0 auto;">
+            <button type="submit" class="btn btn-primary" style="height: 44px;">
+              Check Selected Dates
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Prominent Availability Summary Headline -->
+      <div style="background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-xs); padding: var(--space-md) var(--space-lg); margin-bottom: var(--space-xl); display: flex; justify-content: space-between; align-items: center; flex-wrap: gap;">
+        <div>
+          <span style="font-size: 0.76rem; font-weight: bold; text-transform: uppercase; color: var(--color-gold-dark); letter-spacing: 0.08em;">
+            Live Date Calculation
+          </span>
+          <h3 id="avail-headline-text" style="font-size: 1.25rem; margin-top: 2px; color: var(--color-text-primary);">
+            Evaluating availability...
+          </h3>
+        </div>
+        <div style="display: flex; gap: var(--space-sm);">
+          <span class="badge badge-light" id="avail-dates-badge">Dates</span>
+        </div>
+      </div>
+
+      <!-- Metric Summary Cards -->
+      <div class="availability-summary-row">
+        <div class="summary-metric-card">
+          <div class="metric-icon-wrap" style="background: #EBF3FA; color: #185A9D;">🏡</div>
+          <div class="metric-meta">
+            <span class="metric-number" id="summary-total-count">5</span>
+            <span class="metric-label">Total Cottages</span>
+          </div>
+        </div>
+
+        <div class="summary-metric-card">
+          <div class="metric-icon-wrap" style="background: #E8F5E9; color: #2E7D32;">✓</div>
+          <div class="metric-meta">
+            <span class="metric-number" id="summary-available-count" style="color: #2E7D32;">0</span>
+            <span class="metric-label">Available for Dates</span>
+          </div>
+        </div>
+
+        <div class="summary-metric-card">
+          <div class="metric-icon-wrap" style="background: #FFEBEE; color: #C62828;">✕</div>
+          <div class="metric-meta">
+            <span class="metric-number" id="summary-booked-count" style="color: #C62828;">0</span>
+            <span class="metric-label">Booked for Dates</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Individual Cottage Status Cards Grid -->
+      <div class="availability-cottages-grid" id="availability-status-grid">
+        <!-- Rendered dynamically based on selected date range -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: The 5 Cottages Detailed Catalog
+         ========================================================================== -->
+    <section class="container content-section" id="cottages-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Accommodations</span>
+        <h2 class="section-title">Our 5 Guest Cottages</h2>
+        <p class="section-subtitle">
+          Clean, well-ventilated cottages designed for families, officials, and visiting travelers.
+        </p>
+      </div>
+
+      <!-- 5 Cottages Grid -->
+      <div class="rooms-grid" id="cottages-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROMINENT SECTION: Today's Menu & Tomorrow's Menu
+         ========================================================================== -->
+    <section class="container content-section" id="menu-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Community Bhojanalaya</span>
+        <h2 class="section-title">Dining Menu &amp; Daily Schedule</h2>
+        <p class="section-subtitle">
+          Freshly cooked, hygienic vegetarian meals prepared on-site. Managed through the administrative portal.
+        </p>
+      </div>
+
+      <!-- Menu Tabs Bar (Today / Tomorrow) -->
+      <div class="menu-tabs-bar">
+        <button type="button" class="menu-tab-btn active" id="tab-today-btn">
+          📅 Today's Menu
+        </button>
+        <button type="button" class="menu-tab-btn" id="tab-tomorrow-btn">
+          🌅 Tomorrow's Menu
+        </button>
+      </div>
+
+      <div style="text-align: center; margin-bottom: var(--space-xl);">
+        <span class="badge badge-gold" id="menu-date-badge">Today's Fresh Vegetarian Menu</span>
+      </div>
+
+      <!-- Dining Menu Food Cards -->
+      <div class="menu-grid" id="menu-courses-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         PROMINENT SECTION: Book a Cottage Form
+         ========================================================================== -->
+    <section class="container content-section" id="booking-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Advance Reservation</span>
+        <h2 class="section-title">Book a Cottage</h2>
+        <p class="section-subtitle">
+          Submit your booking request. Requests are cross-verified against live cottage availability and sent to the front desk.
+        </p>
+      </div>
+
+      <!-- Booking Form Card -->
+      <div class="booking-form-card">
+        
+        <!-- Live Form Feedback Alert -->
+        <div id="booking-alert" class="alert-banner alert-error" style="display: none;"></div>
+
+        <form id="public-booking-form" novalidate>
+          <div class="form-grid">
+            
+            <!-- 1. Guest Name -->
+            <div class="form-group">
+              <label for="book-name" class="form-label">Full Name of Primary Guest <span class="req">*</span></label>
+              <input type="text" id="book-name" class="form-input" placeholder="e.g. Rameshwar Patil" required />
+            </div>
+
+            <!-- 2. Phone Number -->
+            <div class="form-group">
+              <label for="book-phone" class="form-label">Mobile Contact Number <span class="req">*</span></label>
+              <input type="tel" id="book-phone" class="form-input" placeholder="10-digit mobile number" maxlength="10" required />
+            </div>
+
+            <!-- 3. Email (Optional) -->
+            <div class="form-group">
+              <label for="book-email" class="form-label">Email Address (Optional)</label>
+              <input type="email" id="book-email" class="form-input" placeholder="name@example.com" />
+            </div>
+
+            <!-- 4. Stay Dates (Check-In & Check-Out) -->
+            <div class="form-group">
+              <label for="book-checkin" class="form-label">Check-In Date <span class="req">*</span></label>
+              <input type="date" id="book-checkin" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+              <label for="book-checkout" class="form-label">Check-Out Date <span class="req">*</span></label>
+              <input type="date" id="book-checkout" class="form-input" required />
+            </div>
+
+            <!-- 5. Dynamic Cottage Selection -->
+            <div class="form-group">
+              <label for="book-cottage" class="form-label">Select Cottage <span class="req">*</span></label>
+              <select id="book-cottage" class="form-select" required>
+                <!-- Populated dynamically based on chosen check-in and check-out dates -->
+              </select>
+            </div>
+
+            <!-- 6. Number of Guests -->
+            <div class="form-group">
+              <label for="book-guests" class="form-label">Total Guests <span class="req">*</span></label>
+              <select id="book-guests" class="form-select" required>
+                <option value="1">1 Guest</option>
+                <option value="2" selected>2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests (Cottage 3)</option>
+              </select>
+            </div>
+
+            <!-- 7. Food / Meal Requirement -->
+            <div class="form-group">
+              <label for="book-meals" class="form-label">Bhojanalaya Meal Preference</label>
+              <select id="book-meals" class="form-select">
+                <option value="No Meals (Room Only)">No Meals (Room Only)</option>
+                <option value="Breakfast Only">Breakfast Only</option>
+                <option value="Breakfast + Dinner">Breakfast + Dinner (Half Board)</option>
+                <option value="All Meals (Breakfast + Lunch + Dinner)">All Meals (Full Board Pure Veg)</option>
+              </select>
+            </div>
+
+            <!-- 8. Special Requests -->
+            <div class="form-group col-span-2">
+              <label for="book-notes" class="form-label">Special Requests / Purpose of Visit</label>
+              <textarea id="book-notes" class="form-textarea" placeholder="e.g. Expected late evening arrival, ground-floor preference for elderly parents, or official purpose."></textarea>
+            </div>
+
+            <!-- Stay Summary -->
+
+<div class="form-group col-span-2">
+  <div class="booking-summary" id="booking-summary" style="display: none;">
+    <h3 class="booking-summary-title">Stay Summary</h3>
+
+```
+<div class="booking-summary-row">
+  <span>Check-In</span>
+  <strong id="summary-checkin">—</strong>
+</div>
+
+<div class="booking-summary-row">
+  <span>Check-Out</span>
+  <strong id="summary-checkout">—</strong>
+</div>
+
+<div class="booking-summary-row">
+  <span>Number of Nights</span>
+  <strong id="summary-nights">—</strong>
+</div>
+
+<div class="booking-summary-row">
+  <span>Selected Cottage</span>
+  <strong id="summary-cottage">—</strong>
+</div>
+
+<div class="booking-summary-row">
+  <span>Rate Per Night</span>
+  <strong id="summary-rate">—</strong>
+</div>
+
+<div class="booking-summary-row">
+  <span>Meal Preference</span>
+  <strong id="summary-meals">—</strong>
+</div>
+
+<div class="booking-summary-total">
+  <span>Estimated Accommodation Amount</span>
+  <strong id="summary-total">₹0</strong>
+</div>
+
+<p class="booking-summary-note">
+  * This is an estimated accommodation amount. Final charges, including any applicable meal charges, will be confirmed by the front desk.
+</p>
+```
+
+  </div>
+</div>
+
+            <!-- Submit Button -->
+            <div class="form-group col-span-2" style="margin-top: var(--space-xs);">
+              <button type="submit" class="btn btn-primary btn-lg" id="submit-booking-btn" style="width: 100%;">
+                Submit Booking Request
+              </button>
+              <p style="font-size: 0.78rem; color: var(--color-text-muted); text-align: center; margin-top: 8px;">
+                No online payment is collected. Government-issued photo ID is required upon arrival.
+              </p>
+            </div>
+
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: Campus Facilities
+         ========================================================================== -->
+    <section class="container content-section" id="facilities-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Practical Amenities</span>
+        <h2 class="section-title">Campus Facilities</h2>
+        <p class="section-subtitle">
+          Essential on-premise infrastructure provided for all registered guests.
+        </p>
+      </div>
+
+      <div class="facilities-grid" id="facilities-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: Photo Gallery
+         ========================================================================== -->
+    <section class="container content-section" id="gallery-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Property Photographs</span>
+        <h2 class="section-title">Visual Tour &amp; Cottages</h2>
+        <p class="section-subtitle">
+          Click any photo to open the full-screen lightbox viewer.
+        </p>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: Location, Transit & Contact Desk
+         ========================================================================== -->
+    <section class="container content-section" id="contact-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Reach The Property</span>
+        <h2 class="section-title">Location &amp; Help Desk</h2>
+        <p class="section-subtitle">
+          Gram Panchayat Tourism Complex &bull; Near Main Block Office, State Highway 14
+        </p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-info-card">
+          <span class="badge badge-gold" style="margin-bottom: var(--space-xs);">Front Desk &amp; Helpline</span>
+          <h3 style="font-size: 1.35rem; margin-top: var(--space-xs); margin-bottom: var(--space-lg);">Reception Contact</h3>
+
+          <div class="contact-item">
+            <span class="contact-icon">📍</span>
+            <div>
+              <div class="contact-label">Physical Campus Address</div>
+              <div class="contact-value">
+                Gram Panchayat Tourism Complex, Near Main Block Office, State Highway 14, Sample District (Demonstration Placeholder) &bull; PIN: 410 001
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <div>
+              <div class="contact-label">24/7 Helpline Desk</div>
+              <div class="contact-value">
+                <strong>+91 98220 XXXXX</strong> (Front Desk Mobile)<br>
+                <strong>+91 2140 XXXXX</strong> (Panchayat Desk)
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">✉️</span>
+            <div>
+              <div class="contact-label">Official Email</div>
+              <div class="contact-value">panchayat.stay@demo.gov.in</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-icon">⏰</span>
+            <div>
+              <div class="contact-label">Check-in / Check-out</div>
+              <div class="contact-value">Check-in: 12:00 PM (Noon) &bull; Check-out: 11:00 AM</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="map-placeholder-box">
+          <span style="font-size: 2.5rem; margin-bottom: var(--space-sm);">🗺️</span>
+          <h3 style="font-size: 1.25rem; margin-bottom: var(--space-xs);">Interactive Map Integration Container</h3>
+          <p style="font-size: 0.88rem; color: var(--color-text-secondary); max-width: 400px; margin-bottom: var(--space-md);">
+            Structured for iframe embed or GPS coordinates when deployed for the client project.
+          </p>
+          <div style="background: #FFFFFF; border: 1px solid var(--color-border); border-radius: var(--radius-xs); padding: 8px 16px; font-size: 0.8rem; font-family: monospace; color: var(--color-text-primary); margin-bottom: var(--space-md);">
+            GPS: 18.5204° N, 73.8567° E (Sample Coordinates)
+          </div>
+          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+            Open in Google Maps ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       Booking Confirmation Modal
+       ========================================================================== -->
+  <div class="modal-backdrop" id="booking-confirmation-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="confirmation-card" id="confirmation-card-content">
+      <div class="confirmation-badge-success">✓</div>
+      <h2 style="font-size: 1.6rem; margin-bottom: var(--space-xs);">Booking Request Submitted</h2>
+      <p style="font-size: 0.92rem; color: var(--color-text-secondary); margin-bottom: var(--space-md);">
+        Your reservation request has been registered in the system. The front desk will verify your room allocation upon arrival.
+      </p>
+
+      <table class="confirmation-table" id="confirmation-details-table">
+        <!-- Injected via JavaScript -->
+      </table>
+
+      <div style="display: flex; gap: var(--space-sm); justify-content: center; margin-top: var(--space-lg);">
+        <button type="button" class="btn btn-dark btn-sm" id="confirm-print-btn">Print Summary</button>
+        <button type="button" class="btn btn-primary btn-sm" id="confirm-close-btn">Done / Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Cottage Detail Modal Shell
+       ========================================================================== -->
+  <div class="modal-backdrop" id="room-detail-modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="room-modal" id="modal-container">
+      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">&times;</button>
+      <div class="modal-scrollable-content" id="modal-content"></div>
+      <div class="modal-footer" id="modal-footer">
+        <div class="modal-footer-price">
+          <div class="modal-price-number" id="modal-price-display">₹0</div>
+          <span class="modal-price-label">per night + standard GST &bull; official government tariff</span>
+        </div>
+        <div class="modal-footer-actions">
+          <button type="button" class="btn btn-outline" id="modal-fav-btn">
+            <span style="color: #C0392B;">♥</span> Save
+          </button>
+          <button type="button" class="btn btn-primary" id="modal-book-cta-btn">
+            Book for Selected Dates
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Photo Gallery Lightbox Modal
+       ========================================================================== -->
+  <div class="lightbox-backdrop" id="gallery-lightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="lightbox-container">
+      <button type="button" class="lightbox-close" id="lightbox-close-btn" aria-label="Close photo viewer">&times;</button>
+      <button type="button" class="lightbox-btn lightbox-prev" id="lightbox-prev-btn" aria-label="Previous photo">‹</button>
+      <img src="" alt="" class="lightbox-img" id="lightbox-main-img" />
+      <button type="button" class="lightbox-btn lightbox-next" id="lightbox-next-btn" aria-label="Next photo">›</button>
+      <div class="lightbox-meta">
+        <h4 class="lightbox-title" id="lightbox-title"></h4>
+        <p class="lightbox-caption" id="lightbox-caption"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Professional Footer
+       ========================================================================== -->
+  <footer style="background: var(--color-surface); border-top: 1px solid var(--color-border); padding: var(--space-3xl) 0 var(--space-2xl); color: var(--color-text-secondary);">
+    <div class="container" style="display: flex; flex-direction: column; align-items: center; text-align: center; gap: var(--space-md);">
+      
+      <div class="brand-logo" style="justify-content: center;">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11 20A7 7 0 0 1 4 13C4 8.5 8 3 13 3c5.5 0 7 2.5 7 7a7 7 0 0 1-7 7l-2 3z"></path>
+            <path d="M11 13a3.5 3.5 0 0 0 5-5"></path>
+          </svg>
+        </span>
+        <div class="brand-text-block" style="text-align: left;">
+          <span class="brand-title" style="font-size: 1.85rem;">FARM RESORT<span class="brand-dot">.</span> AKILI</span>
+          <span class="brand-subtitle">Gram Panchayat Tourism Project &bull; 5 Cottages</span>
+        </div>
+      </div>
+
+      <p style="max-width: 650px; font-size: 0.92rem; color: var(--color-text-secondary); line-height: 1.7;">
+        Gram Panchayat Tourism Complex, Near Main Block Office, State Highway 14<br>
+        24/7 Helpline Placeholder: +91 98220 XXXXX &bull; Desk: +91 2140 XXXXX &bull; Email: panchayat.stay@demo.gov.in
+      </p>
+
+      <div style="display: flex; gap: var(--space-md); margin-top: var(--space-xs);">
+        <a href="#hero" style="font-size: 0.85rem; color: var(--color-gold-dark);">Back to Top ↑</a>
+        <span>&bull;</span>
+        <a href="admin.html" style="font-size: 0.85rem; color: var(--color-gold-dark); font-weight: bold;">
+          ⚙️ Staff &amp; Administrative Management Portal
+        </a>
+      </div>
+
+      <div style="border-top: 1px solid var(--color-border-subtle); width: 100%; max-width: 720px; padding-top: var(--space-md); margin-top: var(--space-sm);">
+        <p style="font-size: 0.8rem; color: var(--color-text-muted);">
+          &copy; 2026 FARM RESORT. AKILI. Developed as a professional portfolio demonstration for a Gram Panchayat-linked hospitality project.
+          All contact numbers, prices, and reviews represent structured demonstration placeholders.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Admin Portal | FARM RESORT. AKILI Atithi Niwas</title>
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FARM RESORT. AKILI Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections.css">
+  <link rel="stylesheet" href="css/admin.css">
+
+  <script type="module" src="js/admin.js"></script>
+</head>
+<body style="background: var(--color-bg);">
+
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="admin-brand">
+      <span class="brand-mark" aria-hidden="true" style="width: 36px; height: 36px;">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M11 20A7 7 0 0 1 4 13C4 8.5 8 3 13 3c5.5 0 7 2.5 7 7a7 7 0 0 1-7 7l-2 3z"></path>
+          <path d="M11 13a3.5 3.5 0 0 0 5-5"></path>
+        </svg>
+      </span>
+      <div class="admin-title-wrap">
+        <h1>FARM RESORT<span class="brand-dot" style="color: #2E6327; font-weight: 800;">.</span> AKILI &bull; Staff Management Portal</h1>
+        <p>Gram Panchayat Hospitality Project &bull; Date-Based Availability Admin</p>
+      </div>
+    </div>
+
+    <!-- Admin Navigation Tabs -->
+    <div class="admin-nav-tabs">
+      <button type="button" class="admin-tab-btn active" data-tab="tab-bookings">
+        📋 Bookings &amp; Status Manager (<span id="admin-booking-count">0</span>)
+      </button>
+      <button type="button" class="admin-tab-btn" data-tab="tab-cottages">
+        🏡 5 Cottages Overview
+      </button>
+      <button type="button" class="admin-tab-btn" data-tab="tab-menu">
+        🍲 Dining Menu
+      </button>
+    </div>
+
+    <div style="display: flex; gap: var(--space-sm); align-items: center;">
+      <button type="button" class="btn btn-outline btn-sm" id="btn-reset-demo" title="Reset cottages, menus, and bookings to demo defaults">
+        ↺ Reset Demo Data
+      </button>
+      <a href="index.html" class="btn btn-dark btn-sm">
+        Public Website ↗
+      </a>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-4xl);">
+
+    <!-- Global Notice Banner -->
+    <div style="background: #FFF9E6; border: 1px solid #ECC94B; border-radius: var(--radius-xs); padding: 12px 16px; margin-bottom: var(--space-xl); display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #744210;">
+      <div>
+        <strong>Date-Based Availability Active:</strong> Availability on the public website is calculated directly from active bookings (Confirmed / Pending). Setting a booking to <strong>Cancelled</strong> immediately frees up that cottage for those dates!
+      </div>
+      <span class="badge badge-gold">Live Local Demo</span>
+    </div>
+
+    <!-- Feedback Message Banner -->
+    <div id="admin-alert" class="alert-banner alert-success" style="display: none;"></div>
+
+    <!-- ======================================================================
+         TAB 1: Bookings Manager & Status Editor (PRIMARY)
+         ====================================================================== -->
+    <div class="admin-tab-content active" id="tab-bookings">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">All Reservations &amp; Date-Overlap Bookings</h2>
+            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 2px;">
+              Manage reservation statuses. Only <strong>Confirmed</strong> and <strong>Pending</strong> bookings block availability on the public website.
+            </p>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Booking Ref</th>
+                <th>Guest Details</th>
+                <th>Assigned Cottage</th>
+                <th>Check-In</th>
+                <th>Check-Out</th>
+                <th>Duration</th>
+                <th>Current Status</th>
+                <th style="text-align: right;">Update Status</th>
+              </tr>
+            </thead>
+            <tbody id="admin-bookings-table-body">
+              <!-- Rendered via js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         TAB 2: The 5 Cottages Overview
+         ====================================================================== -->
+    <div class="admin-tab-content" id="tab-cottages" style="display: none;">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Property Units Overview (All 5 Cottages)</h2>
+            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 2px;">
+              Specifications and active upcoming reservations for each of the 5 property cottages.
+            </p>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Unit</th>
+                <th>Cottage Name</th>
+                <th>Capacity</th>
+                <th>Tariff / Night</th>
+                <th>Active Reservations</th>
+              </tr>
+            </thead>
+            <tbody id="admin-cottages-table-body">
+              <!-- Rendered via js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         TAB 3: Dining Menu Editor (Today & Tomorrow)
+         ====================================================================== -->
+    <div class="admin-tab-content" id="tab-menu" style="display: none;">
+      
+      <!-- Sub-tabs for Today vs Tomorrow -->
+      <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-md);">
+        <button type="button" class="btn btn-outline btn-sm active" id="btn-edit-today">Edit Today's Menu</button>
+        <button type="button" class="btn btn-outline btn-sm" id="btn-edit-tomorrow">Edit Tomorrow's Menu</button>
+      </div>
+
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title" id="menu-editor-title">Dining Menu Editor &bull; Today's Menu</h2>
+            <p style="font-size: 0.85rem; color: var(--color-text-secondary); margin-top: 2px;">
+              Enter one dish per line. Click "Save Menu Changes" to update the live public dining schedule.
+            </p>
+          </div>
+          <button type="button" class="btn btn-primary btn-sm" id="btn-save-menu">
+            💾 Save Menu Changes
+          </button>
+        </div>
+
+        <form id="menu-editor-form">
+          <div class="menu-editor-grid">
+            
+            <div class="menu-edit-box">
+              <label class="menu-edit-label" for="edit-breakfast">
+                <span>🍲</span> Morning Breakfast (One item per line)
+              </label>
+              <textarea id="edit-breakfast" class="menu-edit-textarea" placeholder="e.g. Kanda Poha&#10;Upma&#10;Tea/Coffee"></textarea>
+            </div>
+
+            <div class="menu-edit-box">
+              <label class="menu-edit-label" for="edit-lunch">
+                <span>🍛</span> Afternoon Lunch Thali (One item per line)
+              </label>
+              <textarea id="edit-lunch" class="menu-edit-textarea" placeholder="e.g. Chapatis&#10;Dal Tadka&#10;Seasonal Sabzi&#10;Rice&#10;Chaas"></textarea>
+            </div>
+
+            <div class="menu-edit-box">
+              <label class="menu-edit-label" for="edit-snacks">
+                <span>☕</span> Evening Refreshments (One item per line)
+              </label>
+              <textarea id="edit-snacks" class="menu-edit-textarea" placeholder="e.g. Batata Vada&#10;Chai"></textarea>
+            </div>
+
+            <div class="menu-edit-box">
+              <label class="menu-edit-label" for="edit-dinner">
+                <span>🍽️</span> Night Dinner Thali (One item per line)
+              </label>
+              <textarea id="edit-dinner" class="menu-edit-textarea" placeholder="e.g. Bhakri&#10;Paneer Curry&#10;Khichdi&#10;Gulab Jamun"></textarea>
+            </div>
+
+          </div>
+
+          <div style="margin-top: var(--space-lg); text-align: right;">
+            <button type="submit" class="btn btn-primary">
+              💾 Save Menu Changes
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </main>
+
+  <footer style="background: #FFFFFF; border-top: 1px solid var(--color-border); padding: var(--space-xl) 0; text-align: center; font-size: 0.82rem; color: var(--color-text-muted);">
+    <div class="container">
+      FARM RESORT. AKILI &bull; Staff Administrative Management Module &bull; Gram Panchayat Tourism Project
+    </div>
+  </footer>
+
+</body>
+</html>
