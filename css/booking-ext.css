@@ -3,6 +3,21 @@
    ========================================================================== */
 
 /* --- Booking Type Selector --- */
+.booking-fields {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+
+.booking-fields[hidden] {
+  display: none;
+}
+
+.booking-fields .col-span-2 {
+  grid-column: 1 / -1;
+}
+
 .booking-type-selector {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -551,6 +566,15 @@
 
 /* --- Responsive --- */
 @media (max-width: 768px) {
+  .booking-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .form-section-divider,
+  .guest-list-container {
+    grid-column: 1 / -1;
+  }
+
   .booking-type-selector {
     grid-template-columns: 1fr;
   }

@@ -292,15 +292,13 @@
       </div>
     </section>
 
-    <!-- ==========================================================================
-         PROMINENT SECTION: Book a Cottage Form
-         ========================================================================== -->
+    <!-- Booking form -->
     <section class="container content-section" id="booking-section">
       <div class="section-header">
         <span class="section-eyebrow">Advance Reservation</span>
-        <h2 class="section-title">Book a Cottage</h2>
+        <h2 class="section-title">Make a Reservation</h2>
         <p class="section-subtitle">
-          Submit your booking request. Requests are cross-verified against live cottage availability and sent to the front desk.
+          Submit your booking request for an accommodation or the function hall. Availability is checked before your request is saved.
         </p>
       </div>
 
@@ -308,127 +306,94 @@
       <div class="booking-form-card">
         
         <!-- Live Form Feedback Alert -->
-        <div id="booking-alert" class="alert-banner alert-error" style="display: none;"></div>
+        <div id="booking-alert" class="alert-banner alert-error" role="alert" style="display: none;"></div>
 
         <form id="public-booking-form" novalidate>
           <div class="form-grid">
-            
-            <!-- 1. Guest Name -->
-            <div class="form-group">
-              <label for="book-name" class="form-label">Full Name of Primary Guest <span class="req">*</span></label>
-              <input type="text" id="book-name" class="form-input" placeholder="e.g. Rameshwar Patil" required />
+            <div class="form-group col-span-2">
+              <label for="book-type" class="form-label">Booking Type <span class="req">*</span></label>
+              <select id="book-type" class="form-select" required>
+                <option value="accommodation">Accommodation</option>
+                <option value="hall">Function Hall</option>
+              </select>
             </div>
-
-            <!-- 2. Phone Number -->
             <div class="form-group">
-              <label for="book-phone" class="form-label">Mobile Contact Number <span class="req">*</span></label>
-              <input type="tel" id="book-phone" class="form-input" placeholder="10-digit mobile number" maxlength="10" required />
+              <label for="book-name" class="form-label">Primary Guest Full Name <span class="req">*</span></label>
+              <input type="text" id="book-name" class="form-input" placeholder="e.g. Rameshwar Patil" maxlength="120" required />
             </div>
-
-            <!-- 3. Email (Optional) -->
             <div class="form-group">
+              <label for="book-age" class="form-label">Primary Guest Age <span class="req">*</span></label>
+              <input type="number" id="book-age" class="form-input" min="1" max="120" step="1" required />
+            </div>
+            <div class="form-group col-span-2">
+              <label for="book-address" class="form-label">Primary Guest Permanent Address <span class="req">*</span></label>
+              <textarea id="book-address" class="form-textarea" maxlength="500" required></textarea>
+            </div>
+            <div class="form-group">
+              <label for="book-phone" class="form-label">Primary Guest Phone Number 1 <span class="req">*</span></label>
+              <input type="tel" id="book-phone" class="form-input" placeholder="10-digit mobile number" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required />
+            </div>
+            <div class="form-group">
+              <label for="book-alt-phone" class="form-label">Primary Guest Phone Number 2 <span class="req">*</span></label>
+              <input type="tel" id="book-alt-phone" class="form-input" placeholder="10-digit alternate number" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" required />
+            </div>
+            <div class="form-group col-span-2">
               <label for="book-email" class="form-label">Email Address (Optional)</label>
               <input type="email" id="book-email" class="form-input" placeholder="name@example.com" />
             </div>
 
-            <!-- 4. Stay Dates (Check-In & Check-Out) -->
-            <div class="form-group">
-              <label for="book-checkin" class="form-label">Check-In Date <span class="req">*</span></label>
-              <input type="date" id="book-checkin" class="form-input" required />
+            <div id="accommodation-fields" class="booking-fields">
+              <div class="form-group">
+                <label for="book-checkin" class="form-label">Check-In Date <span class="req">*</span></label>
+                <input type="date" id="book-checkin" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="book-checkout" class="form-label">Check-Out Date <span class="req">*</span></label>
+                <input type="date" id="book-checkout" class="form-input" required />
+              </div>
+              <div class="form-group">
+                <label for="book-cottage" class="form-label">Select Accommodation <span class="req">*</span></label>
+                <select id="book-cottage" class="form-select" required></select>
+              </div>
+              <div class="form-group">
+                <label for="book-guests" class="form-label">Total Guests <span class="req">*</span></label>
+                <select id="book-guests" class="form-select" required>
+                  <option value="1">1 Guest</option>
+                  <option value="2" selected>2 Guests</option>
+                  <option value="3">3 Guests</option>
+                  <option value="4">4 Guests</option>
+                  <option value="5">5 Guests</option>
+                </select>
+              </div>
+              <div class="form-group col-span-2">
+                <label for="book-meals" class="form-label">Bhojanalaya Meal Preference</label>
+                <select id="book-meals" class="form-select">
+                  <option value="No Meals (Room Only)">No Meals (Room Only)</option>
+                  <option value="Breakfast Only">Breakfast Only</option>
+                  <option value="Breakfast + Dinner">Breakfast + Dinner (Half Board)</option>
+                  <option value="All Meals (Breakfast + Lunch + Dinner)">All Meals (Full Board Pure Veg)</option>
+                </select>
+              </div>
+            </div>
+            <div id="hall-fields" class="booking-fields" hidden>
+              <div class="hall-booking-notice col-span-2">
+                <span><strong>Function Hall:</strong> Suva Mandap &nbsp;·&nbsp; <strong>Location:</strong> Chandiput &nbsp;·&nbsp; <strong>Area:</strong> 2,000 sq ft &nbsp;·&nbsp; <strong>Rate:</strong> ₹5,000 per day</span>
+              </div>
+              <div class="form-group col-span-2">
+                <label for="book-event-date" class="form-label">Event / Booking Date <span class="req">*</span></label>
+                <input type="date" id="book-event-date" class="form-input" />
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="book-checkout" class="form-label">Check-Out Date <span class="req">*</span></label>
-              <input type="date" id="book-checkout" class="form-input" required />
+            <div class="form-section-divider"><h4>Other Guests / Attendees (Optional)</h4></div>
+            <div class="guest-list-container" id="book-other-guests">
+              <button type="button" class="btn-add-guest" id="book-add-guest">+ Add Guest</button>
             </div>
 
-            <!-- 5. Dynamic Cottage Selection -->
-            <div class="form-group">
-              <label for="book-cottage" class="form-label">Select Cottage <span class="req">*</span></label>
-              <select id="book-cottage" class="form-select" required>
-                <!-- Populated dynamically based on chosen check-in and check-out dates -->
-              </select>
-            </div>
-
-            <!-- 6. Number of Guests -->
-            <div class="form-group">
-              <label for="book-guests" class="form-label">Total Guests <span class="req">*</span></label>
-              <select id="book-guests" class="form-select" required>
-                <option value="1">1 Guest</option>
-                <option value="2" selected>2 Guests</option>
-                <option value="3">3 Guests</option>
-                <option value="4">4 Guests</option>
-                <option value="5">5 Guests (Cottage 3)</option>
-              </select>
-            </div>
-
-            <!-- 7. Food / Meal Requirement -->
-            <div class="form-group">
-              <label for="book-meals" class="form-label">Bhojanalaya Meal Preference</label>
-              <select id="book-meals" class="form-select">
-                <option value="No Meals (Room Only)">No Meals (Room Only)</option>
-                <option value="Breakfast Only">Breakfast Only</option>
-                <option value="Breakfast + Dinner">Breakfast + Dinner (Half Board)</option>
-                <option value="All Meals (Breakfast + Lunch + Dinner)">All Meals (Full Board Pure Veg)</option>
-              </select>
-            </div>
-
-            <!-- 8. Special Requests -->
             <div class="form-group col-span-2">
               <label for="book-notes" class="form-label">Special Requests / Purpose of Visit</label>
               <textarea id="book-notes" class="form-textarea" placeholder="e.g. Expected late evening arrival, ground-floor preference for elderly parents, or official purpose."></textarea>
             </div>
-
-            <!-- Stay Summary -->
-
-<div class="form-group col-span-2">
-  <div class="booking-summary" id="booking-summary" style="display: none;">
-    <h3 class="booking-summary-title">Stay Summary</h3>
-
-```
-<div class="booking-summary-row">
-  <span>Check-In</span>
-  <strong id="summary-checkin">—</strong>
-</div>
-
-<div class="booking-summary-row">
-  <span>Check-Out</span>
-  <strong id="summary-checkout">—</strong>
-</div>
-
-<div class="booking-summary-row">
-  <span>Number of Nights</span>
-  <strong id="summary-nights">—</strong>
-</div>
-
-<div class="booking-summary-row">
-  <span>Selected Cottage</span>
-  <strong id="summary-cottage">—</strong>
-</div>
-
-<div class="booking-summary-row">
-  <span>Rate Per Night</span>
-  <strong id="summary-rate">—</strong>
-</div>
-
-<div class="booking-summary-row">
-  <span>Meal Preference</span>
-  <strong id="summary-meals">—</strong>
-</div>
-
-<div class="booking-summary-total">
-  <span>Estimated Accommodation Amount</span>
-  <strong id="summary-total">₹0</strong>
-</div>
-
-<p class="booking-summary-note">
-  * This is an estimated accommodation amount. Final charges, including any applicable meal charges, will be confirmed by the front desk.
-</p>
-```
-
-  </div>
-</div>
-
             <!-- Submit Button -->
             <div class="form-group col-span-2" style="margin-top: var(--space-xs);">
               <button type="submit" class="btn btn-primary btn-lg" id="submit-booking-btn" style="width: 100%;">

@@ -13,6 +13,7 @@ import {
 
 import { 
   getCottages, 
+  getHalls,
   getAvailabilityForDateRange, 
   getMenuData, 
   createBookingRequest, 
@@ -69,6 +70,18 @@ function formatDate(d) {
   return `${year}-${month}-${day}`;
 }
 
+function nextDate(dateString) {
+  const day = new Date(`${dateString}T00:00:00`);
+  day.setDate(day.getDate() + 1);
+  return formatDate(day);
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[char]);
+}
+
 // ==========================================================================
 // 1. Date Synchronization & Controls
 // ==========================================================================
@@ -105,6 +118,7 @@ function initDefaultDates() {
     bookOut.min = formatDate(new Date(defaultIn.getTime() + 86400000));
     bookOut.value = state.checkOut;
   }
+  document.getElementById('book-event-date').min = formatDate(today);
 }
 
 function initDateListeners() {
@@ -404,13 +418,13 @@ function populateBookingCottageDropdown(cottages) {
 
   select.innerHTML = `
     <option value="" disabled ${!currentSelection ? 'selected' : ''}>
-      ${hasAvailable ? '-- Select an Available Cottage for Your Dates --' : '-- No Cottages Available for These Dates --'}
+       ${hasAvailable ? '-- Select Available Accommodation --' : '-- No Accommodations Available for These Dates --'}
     </option>
     ${cottages.map(c => {
       const isAvail = c.isAvailableForDates;
       return `
         <option value="${c.id}" ${!isAvail ? 'disabled' : ''} ${currentSelection === c.id ? 'selected' : ''}>
-          Cottage ${c.number} — ${c.name.split('—')[1] || c.name} (${formatINR(c.pricePerNight)}/night) ${isAvail ? '— [AVAILABLE]' : '— [UNAVAILABLE FOR DATES]'}
+           ${escapeHtml(c.name)} (${formatINR(c.pricePerNight)}/night) ${isAvail ? '— [AVAILABLE]' : '— [UNAVAILABLE FOR DATES]'}
         </option>
       `;
     }).join('')}
@@ -418,6 +432,8 @@ function populateBookingCottageDropdown(cottages) {
 }
 
 function selectCottageInForm(cottageId) {
+  document.getElementById('book-type').value = 'accommodation';
+  document.getElementById('book-type').dispatchEvent(new Event('change'));
   const select = document.getElementById('book-cottage');
   if (select) {
     select.value = cottageId;
@@ -441,58 +457,117 @@ function initBookingForm() {
 
   if (!form) return;
 
+  const typeSelect = document.getElementById('book-type');
+  const accommodationFields = document.getElementById('accommodation-fields');
+  const hallFields = document.getElementById('hall-fields');
+  const eventDate = document.getElementById('book-event-date');
+  const guestList = document.getElementById('book-other-guests');
+  const addGuestButton = document.getElementById('book-add-guest');
+  let guestIndex = 0;
+
+  typeSelect.addEventListener('change', () => {
+    const isHall = typeSelect.value === 'hall';
+    accommodationFields.hidden = isHall;
+    hallFields.hidden = !isHall;
+    eventDate.required = isHall;
+    for (const id of ['book-checkin', 'book-checkout', 'book-cottage', 'book-guests']) {
+      document.getElementById(id).required = !isHall;
+    }
+    if (alertEl) alertEl.style.display = 'none';
+  });
+
+  addGuestButton.addEventListener('click', () => {
+    guestIndex++;
+    const row = document.createElement('div');
+    row.className = 'guest-row';
+    row.innerHTML = `
+      <div class="form-group">
+        <label for="other-guest-name-${guestIndex}" class="form-label">Full Name <span class="req">*</span></label>
+        <input id="other-guest-name-${guestIndex}" class="form-input other-guest-name" type="text" maxlength="120" required>
+      </div>
+      <div class="form-group">
+        <label for="other-guest-age-${guestIndex}" class="form-label">Age <span class="req">*</span></label>
+        <input id="other-guest-age-${guestIndex}" class="form-input other-guest-age" type="number" min="1" max="120" step="1" required>
+      </div>
+      <button type="button" class="btn-remove-guest" aria-label="Remove guest ${guestIndex}">Remove</button>
+    `;
+    row.querySelector('.btn-remove-guest').addEventListener('click', () => row.remove());
+    guestList.insertBefore(row, addGuestButton);
+    row.querySelector('input').focus();
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     if (alertEl) alertEl.style.display = 'none';
 
+    const isHall = typeSelect.value === 'hall';
     const name = document.getElementById('book-name').value.trim();
+    const age = Number(document.getElementById('book-age').value);
+    const address = document.getElementById('book-address').value.trim();
     const phone = document.getElementById('book-phone').value.trim();
+    const altPhone = document.getElementById('book-alt-phone').value.trim();
     const email = document.getElementById('book-email').value.trim();
-    const cottageId = document.getElementById('book-cottage').value;
-    const checkIn = document.getElementById('book-checkin').value;
-    const checkOut = document.getElementById('book-checkout').value;
-    const guestsCount = document.getElementById('book-guests').value;
-    const meals = document.getElementById('book-meals').value;
+    const cottageId = isHall ? 'hall-1' : document.getElementById('book-cottage').value;
+    const checkIn = isHall ? eventDate.value : document.getElementById('book-checkin').value;
+    const checkOut = isHall && checkIn ? nextDate(checkIn) : document.getElementById('book-checkout').value;
+    const guestsCount = isHall ? 1 + guestList.querySelectorAll('.guest-row').length : Number(document.getElementById('book-guests').value);
+    const meals = isHall ? 'No Meals' : document.getElementById('book-meals').value;
     const specialRequest = document.getElementById('book-notes').value.trim();
+    const otherGuests = [...guestList.querySelectorAll('.guest-row')].map(row => ({
+      name: row.querySelector('.other-guest-name').value.trim(),
+      age: Number(row.querySelector('.other-guest-age').value)
+    }));
 
-    // 1. Mandatory Fields
-    if (!name || !phone || !cottageId || !checkIn || !checkOut) {
+    if (!name || !address || !phone || !altPhone || !cottageId || !checkIn || !checkOut || !Number.isInteger(age) || age < 1 || age > 120) {
       showError('Please fill in all mandatory fields marked with an asterisk (*).');
       return;
     }
-
-    // 2. Date order validation
-    if (checkOut <= checkIn) {
-      showError('Check-out date must be strictly after the check-in date.');
+    if (otherGuests.some(guest => !guest.name || !Number.isInteger(guest.age) || guest.age < 1 || guest.age > 120)) {
+      showError('Please enter a full name and a valid age (1–120) for each other guest, or remove an empty row.');
+      return;
+    }
+    if (!/^[0-9]{10}$/.test(phone) || !/^[0-9]{10}$/.test(altPhone)) {
+      showError('Please enter two valid 10-digit phone numbers.');
+      return;
+    }
+    if (email && !document.getElementById('book-email').checkValidity()) {
+      showError('Please enter a valid email address or leave it blank.');
+      return;
+    }
+    const today = formatDate(new Date());
+    if (checkIn < today || (!isHall && checkOut <= checkIn) || !form.querySelector(isHall ? '#book-event-date' : '#book-checkin').validity.valid || (!isHall && !document.getElementById('book-checkout').validity.valid)) {
+      showError(isHall ? 'Please choose a valid event date today or later.' : 'Please choose valid dates today or later, with check-out after check-in.');
+      return;
+    }
+    const selectedUnit = (isHall ? getHalls() : getCottages()).find(unit => unit.id === cottageId);
+    if (!selectedUnit) {
+      showError('Selected unit not found. Please refresh and try again.');
+      return;
+    }
+    if (!isHall && guestsCount > selectedUnit.maxGuests) {
+      showError(`${selectedUnit.name} accommodates at most ${selectedUnit.maxGuests} guests. Please choose fewer guests or another accommodation.`);
+      return;
+    }
+    if (otherGuests.length + 1 > guestsCount || (isHall && guestsCount > selectedUnit.maxGuests)) {
+      showError('The guest list exceeds the selected guest count or hall capacity.');
       return;
     }
 
-    // 3. Mobile Number Check
-    const cleanPhone = phone.replace(/[^0-9]/g, '');
-    if (cleanPhone.length !== 10) {
-      showError('Please enter a valid 10-digit Indian mobile number.');
-      return;
-    }
-
-    // 4. Find Cottage
-    const cottages = getCottages();
-    const selectedCottage = cottages.find(c => c.id === cottageId);
-    if (!selectedCottage) {
-      showError('Selected cottage not found. Please refresh and try again.');
-      return;
-    }
-
-    // 5. Submit to Store (performs rigorous date-overlap check)
     const result = createBookingRequest({
+      bookingType: isHall ? 'hall' : 'accommodation',
       guestName: name,
-      phone: cleanPhone,
+      guestAge: age,
+      address,
+      phone,
+      altPhone,
       email,
+      otherGuests,
       cottageId,
-      cottageName: selectedCottage.name,
+      cottageName: selectedUnit.name,
       checkIn,
       checkOut,
       guestsCount,
-      cottageCount: 1,
+      cottageCount: isHall ? 0 : 1,
       meals,
       specialRequest
     });
@@ -502,12 +577,12 @@ function initBookingForm() {
       return;
     }
 
-    // 6. Refresh date availability everywhere
     evaluateDateAvailability();
 
-    // 7. Show Confirmation Pass
-    showConfirmationModal(result.booking, selectedCottage);
+    showConfirmationModal(result.booking, selectedUnit);
     form.reset();
+    guestList.querySelectorAll('.guest-row').forEach(row => row.remove());
+    typeSelect.dispatchEvent(new Event('change'));
 
     // Restore synchronized dates
     document.getElementById('book-checkin').value = state.checkIn;
@@ -524,13 +599,12 @@ function initBookingForm() {
     }
   }
 
-  function showConfirmationModal(booking, cottage) {
+  function showConfirmationModal(booking, unit) {
     const table = document.getElementById('confirmation-details-table');
     if (table) {
-      const d1 = new Date(booking.checkIn);
-      const d2 = new Date(booking.checkOut);
-      const diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) || 1;
-      const totalEstimated = cottage.pricePerNight * diffDays;
+      const isHall = booking.bookingType === 'hall';
+      const diffDays = Math.round((new Date(booking.checkOut) - new Date(booking.checkIn)) / 86400000);
+      const totalEstimated = (isHall ? unit.pricePerDay : unit.pricePerNight) * diffDays;
 
       table.innerHTML = `
         <tr>
@@ -539,26 +613,26 @@ function initBookingForm() {
         </tr>
         <tr>
           <td>Primary Guest</td>
-          <td><strong>${booking.guestName}</strong> (${booking.phone})</td>
+          <td><strong>${escapeHtml(booking.guestName)}</strong> (${escapeHtml(booking.phone)})</td>
         </tr>
         <tr>
           <td>Reserved Unit</td>
-          <td>${cottage.name}</td>
+          <td>${escapeHtml(unit.name)}</td>
         </tr>
         <tr>
-          <td>Stay Duration</td>
-          <td>${booking.checkIn} to ${booking.checkOut} (${diffDays} Night${diffDays > 1 ? 's' : ''})</td>
+          <td>${isHall ? 'Event Date' : 'Stay Duration'}</td>
+          <td>${isHall ? booking.checkIn : `${booking.checkIn} to ${booking.checkOut} (${diffDays} Night${diffDays > 1 ? 's' : ''})`}</td>
         </tr>
         <tr>
           <td>Guests &amp; Units</td>
-          <td>${booking.guestsCount} Guest(s) &bull; 1 Cottage</td>
+          <td>${booking.guestsCount} ${isHall ? 'Attendee(s)' : 'Guest(s) · 1 Accommodation'}</td>
         </tr>
         <tr>
           <td>Meal Preference</td>
-          <td>${booking.meals}</td>
+          <td>${escapeHtml(booking.meals)}</td>
         </tr>
         <tr>
-          <td>Est. Room Tariff</td>
+          <td>Est. ${isHall ? 'Hall' : 'Accommodation'} Tariff</td>
           <td><strong>${formatINR(totalEstimated)}</strong> + GST (Payable at front desk)</td>
         </tr>
         <tr>
