@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/sections.css">
   <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/booking-ext.css">
 
   <!-- Application Bootstrap -->
   <script type="module" src="js/app.js"></script>
@@ -41,7 +42,7 @@
         </span>
         <div class="brand-text-block">
           <span class="brand-title">FARM RESORT<span class="brand-dot">.</span> AKILI</span>
-          <span class="brand-subtitle">Gram Panchayat Tourism Project &bull; 5 Cottages</span>
+          <span class="brand-subtitle">Gram Panchayat Tourism Project &bull; Cottages &amp; Function Hall</span>
         </div>
       </a>
 
@@ -49,7 +50,8 @@
       <nav aria-label="Main Navigation">
         <ul class="nav-menu" id="nav-menu">
           <li><a href="#hero" class="nav-link">Home</a></li>
-          <li><a href="#cottages-section" class="nav-link">Cottages</a></li>
+          <li><a href="#cottages-section" class="nav-link">Accommodations</a></li>
+          <li><a href="#hall-section" class="nav-link">Function Hall</a></li>
           <li><a href="#availability-section" class="nav-link">Availability</a></li>
           <li><a href="#menu-section" class="nav-link">Menu</a></li>
           <li><a href="#booking-section" class="nav-link">Booking</a></li>
@@ -65,7 +67,7 @@
           ⚙️ Admin Portal
         </a>
         <a href="#booking-section" class="btn btn-primary btn-sm">
-          Book a Cottage
+          Book Now
         </a>
 
         <!-- Mobile Menu Hamburger Button -->
@@ -86,7 +88,7 @@
         
         <!-- Location & Project Pill -->
         <div class="hero-location-pill">
-          <span>🏛️ Gram Panchayat Community Tourism Initiative &bull; Exactly 5 Cottages</span>
+          <span>🏛️ Gram Panchayat Community Tourism Initiative &bull; Cottages, Pavilion &amp; Function Hall</span>
         </div>
 
         <!-- Headline -->
@@ -94,12 +96,12 @@
 
         <!-- Subtitle -->
         <p class="hero-subtitle">
-          A disciplined, community-managed guest house featuring <strong>5 private cottages</strong>, safe gated campus, daily sanitized rooms, in-house vegetarian Bhojanalaya, and 24/7 power &amp; water backup for visitors, pilgrims, and officials.
+          A disciplined, community-managed guest house featuring <strong>4 cottages, an open-air pavilion, and a 2,000 sq ft function hall</strong>, safe gated campus, daily sanitized rooms, in-house vegetarian Bhojanalaya, and 24/7 power &amp; water backup for visitors, pilgrims, and officials.
         </p>
 
         <!-- Hero CTAs -->
         <div class="hero-cta-group">
-          <a href="#booking-section" class="btn btn-primary btn-lg">Book a Cottage</a>
+          <a href="#booking-section" class="btn btn-primary btn-lg">Book Now</a>
           <a href="#availability-section" class="btn btn-dark btn-lg">Check Date-Based Availability</a>
           <a href="#menu-section" class="btn btn-outline btn-lg">View Food Menu</a>
         </div>
@@ -108,7 +110,11 @@
         <div class="hero-highlights">
           <div class="hero-highlight-item">
             <span class="hero-highlight-icon">🏡</span>
-            <span>Total 5 Cottages on Campus</span>
+            <span>4 Cottages + Open-Air Pavilion</span>
+          </div>
+          <div class="hero-highlight-item">
+            <span class="hero-highlight-icon">🏛️</span>
+            <span>Suva Mandap Function Hall</span>
           </div>
           <div class="hero-highlight-item">
             <span class="hero-highlight-icon">📅</span>
@@ -133,9 +139,9 @@
     <section class="container content-section" id="availability-section">
       <div class="section-header">
         <span class="section-eyebrow">Date-Range Overlap Engine</span>
-        <h2 class="section-title">Cottage Availability by Dates</h2>
+        <h2 class="section-title">Accommodation &amp; Hall Availability by Dates</h2>
         <p class="section-subtitle">
-          Select your check-in and check-out dates to see real-time availability across all 5 cottages.
+          Select your check-in and check-out dates to see real-time availability across all accommodations and the function hall.
         </p>
       </div>
 
@@ -181,7 +187,7 @@
           <div class="metric-icon-wrap" style="background: #EBF3FA; color: #185A9D;">🏡</div>
           <div class="metric-meta">
             <span class="metric-number" id="summary-total-count">5</span>
-            <span class="metric-label">Total Cottages</span>
+            <span class="metric-label">Total Accommodations</span>
           </div>
         </div>
 
@@ -202,9 +208,19 @@
         </div>
       </div>
 
-      <!-- Individual Cottage Status Cards Grid -->
+      <!-- Accommodation Status Cards Grid -->
       <div class="availability-cottages-grid" id="availability-status-grid">
         <!-- Rendered dynamically based on selected date range -->
+      </div>
+
+      <!-- Function Hall Availability -->
+      <div style="margin-top: var(--space-xl);">
+        <h3 style="font-size: 1.15rem; margin-bottom: var(--space-md); color: var(--color-text-primary); display: flex; align-items: center; gap: 8px;">
+          🏛️ Function Hall Availability
+        </h3>
+        <div class="availability-cottages-grid" id="hall-availability-grid">
+          <!-- Rendered dynamically -->
+        </div>
       </div>
     </section>
 
@@ -214,14 +230,32 @@
     <section class="container content-section" id="cottages-section">
       <div class="section-header">
         <span class="section-eyebrow">Accommodations</span>
-        <h2 class="section-title">Our 5 Guest Cottages</h2>
+        <h2 class="section-title">Our Accommodations</h2>
         <p class="section-subtitle">
-          Clean, well-ventilated cottages designed for families, officials, and visiting travelers.
+          Clean, well-ventilated cottages and an open-air pavilion designed for families, officials, and visiting travelers.
         </p>
       </div>
 
-      <!-- 5 Cottages Grid -->
+      <!-- Accommodations Grid -->
       <div class="rooms-grid" id="cottages-grid">
+        <!-- Rendered dynamically -->
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECTION: Function Hall (Suva Mandap)
+         ========================================================================== -->
+    <section class="container content-section" id="hall-section">
+      <div class="section-header">
+        <span class="section-eyebrow">Event Facility</span>
+        <h2 class="section-title">Suva Mandap &bull; Function Hall</h2>
+        <p class="section-subtitle">
+          A spacious 2,000 sq ft function hall in Chandiput, ideal for weddings, community events, and official gatherings. Booked on a per-day basis at ₹5,000/day.
+        </p>
+      </div>
+
+      <!-- Hall Cards Grid -->
+      <div class="rooms-grid" id="halls-grid">
         <!-- Rendered dynamically -->
       </div>
     </section>
@@ -595,7 +629,7 @@
         </span>
         <div class="brand-text-block" style="text-align: left;">
           <span class="brand-title" style="font-size: 1.85rem;">FARM RESORT<span class="brand-dot">.</span> AKILI</span>
-          <span class="brand-subtitle">Gram Panchayat Tourism Project &bull; 5 Cottages</span>
+          <span class="brand-subtitle">Gram Panchayat Tourism Project &bull; Cottages &amp; Function Hall</span>
         </div>
       </div>
 

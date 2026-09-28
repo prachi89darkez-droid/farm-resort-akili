@@ -1,22 +1,22 @@
 /**
  * ==========================================================================
- * LuxeStay Atithi Niwas - Core Data Models
+ * FARM RESORT. AKILI - Core Data Models
  * Gram Panchayat Community Hospitality Project
  * ==========================================================================
  * 
  * CORE PROPERTY SPECIFICATION:
- * Exactly 5 cottages on this property.
+ * 4 accommodation cottages + 1 open-air pavilion + 1 function hall.
  * All pricing is in Indian Rupees (₹).
  * 
- * Availability is now DYNAMICALLY calculated per date range based on
+ * Availability is DYNAMICALLY calculated per date range based on
  * active booking records (using standard date-overlap verification).
  */
 
 export const propertyInfo = {
   name: "FARM RESORT. AKILI",
   governingBody: "Gram Panchayat Tourism & Hospitality Committee",
-  tagline: "Community-Managed 5-Cottage Hospitality Project",
-  totalCottages: 5,
+  tagline: "Community-Managed Hospitality Project",
+  totalAccommodations: 5,
   currency: "₹",
   address: "Gram Panchayat Tourism Complex, Near Main Block Office, State Highway 14",
   district: "Sample District, Maharashtra (Demonstration Placeholder)",
@@ -29,13 +29,15 @@ export const propertyInfo = {
 };
 
 // ==========================================================================
-// The 5 Cottages Data Model (No static permanent "Booked" lock)
+// Accommodation Units (4 Cottages + 1 Open-Air Pavilion)
+// type: 'cottage' for enclosed units, 'pavilion' for open-air unit
 // ==========================================================================
 export const initialCottages = [
   {
     id: "cottage-1",
     number: 1,
-    name: "Cottage 1 — Sahyadri Niwas",
+    type: "cottage",
+    name: "A1",
     tagline: "Air-conditioned double cottage with front garden verandah",
     maxGuests: 3,
     bedInfo: "1 Queen Bed + 1 Single Diwan Bed",
@@ -49,12 +51,13 @@ export const initialCottages = [
       "32-inch LED TV with DTH",
       "Daily Housekeeping"
     ],
-    description: "Cottage 1 is located near the main entrance grove. Features cool stone flooring, quiet garden facing seating, and hot water supply 24/7."
+    description: "A1 is located near the main entrance grove. Features cool stone flooring, quiet garden facing seating, and hot water supply 24/7."
   },
   {
     id: "cottage-2",
     number: 2,
-    name: "Cottage 2 — Godavari Niwas",
+    type: "cottage",
+    name: "A2",
     tagline: "Comfortable air-conditioned cottage overlooking flowering lawns",
     maxGuests: 3,
     bedInfo: "1 Queen Bed + 1 Single Diwan Bed",
@@ -68,12 +71,13 @@ export const initialCottages = [
       "Clean Bed Linen & Towels",
       "Wardrobe & Luggage Stand"
     ],
-    description: "Cottage 2 offers peaceful natural ventilation and cross-breeze. Ideal for small families or official visitors."
+    description: "A2 offers peaceful natural ventilation and cross-breeze. Ideal for small families or official visitors."
   },
   {
     id: "cottage-3",
     number: 3,
-    name: "Cottage 3 — Krishna Niwas (Family Unit)",
+    type: "cottage",
+    name: "A3",
     tagline: "Spacious multi-bed family cottage with living area",
     maxGuests: 5,
     bedInfo: "2 Double Beds + Extra Rollaway Mattress",
@@ -92,7 +96,8 @@ export const initialCottages = [
   {
     id: "cottage-4",
     number: 4,
-    name: "Cottage 4 — Kaveri Niwas",
+    type: "cottage",
+    name: "A4",
     tagline: "Standard non-AC eco cottage with natural stone cooling",
     maxGuests: 2,
     bedInfo: "1 Queen Bed",
@@ -111,8 +116,9 @@ export const initialCottages = [
   {
     id: "cottage-5",
     number: 5,
-    name: "Cottage 5 — Narmada Niwas (Executive Unit)",
-    tagline: "Premium executive cottage with meeting desk and quiet corner setting",
+    type: "pavilion",
+    name: "OPEN-AIR PAVILION",
+    tagline: "Premium open-air pavilion with meeting desk and quiet corner setting",
     maxGuests: 4,
     bedInfo: "1 King Bed + 1 Queen Bed (Two Rooms)",
     pricePerNight: 2600,
@@ -125,7 +131,34 @@ export const initialCottages = [
       "Mini Refrigerator for Medicines/Water",
       "Private Covered Parking Space"
     ],
-    description: "Specially appointed for visiting district officials, consultants, and executive guests needing a calm work environment."
+    description: "An open-air pavilion accommodation specially appointed for visiting district officials, consultants, and executive guests needing a calm work environment."
+  }
+];
+
+// ==========================================================================
+// Function Hall Data Model
+// type: 'hall' — booked per day (not per night)
+// ==========================================================================
+export const initialHalls = [
+  {
+    id: "hall-1",
+    number: 1,
+    type: "hall",
+    name: "Suva Mandap (Function Hall), Chandiput",
+    tagline: "2,000 sq ft function hall for events, ceremonies, and gatherings",
+    maxGuests: 200,
+    area: "2,000 sq ft",
+    pricePerDay: 5000,
+    image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80",
+    facilities: [
+      "2,000 sq ft Open Floor Space",
+      "Stage Platform for Ceremonies",
+      "Separate Kitchen & Pantry Area",
+      "Adequate Lighting & Ceiling Fans",
+      "Generator Power Backup",
+      "Dedicated Parking for Guests"
+    ],
+    description: "Suva Mandap is a spacious 2,000 sq ft function hall in Chandiput, ideal for weddings, community events, official meetings, and ceremonies. Booked on a per-day basis."
   }
 ];
 
@@ -136,50 +169,98 @@ export const initialBookingRequests = [
   {
     id: "BK-2026-101",
     createdAt: "2026-09-26 14:30",
+    bookingType: "accommodation",
     guestName: "Anil K. Shinde",
+    guestAge: 42,
     phone: "9822198765",
+    altPhone: "9822012345",
+    address: "123 Main Road, Pune, Maharashtra 411001",
     email: "anil.shinde@sample.com",
+    otherGuests: [
+      { name: "Sunita Shinde", age: 38 }
+    ],
     cottageId: "cottage-2",
-    cottageName: "Cottage 2 — Godavari Niwas",
+    cottageName: "A2",
     checkIn: "2026-10-01",
     checkOut: "2026-10-04",
     guestsCount: 2,
     cottageCount: 1,
     meals: "Breakfast + Dinner",
     specialRequest: "Late check-in expected around 8:00 PM due to bus arrival.",
-    status: "Confirmed" // "Pending" | "Confirmed" | "Cancelled"
+    status: "Confirmed",
+    payment: {
+      totalAmount: 5400,
+      advanceAmount: 2000,
+      remainingAmount: 3400,
+      status: "Advance Paid (Demo)",
+      method: "UPI (Demo Integration)",
+      referenceId: "DEMO-UPI-101001"
+    }
   },
   {
     id: "BK-2026-102",
     createdAt: "2026-09-27 09:15",
+    bookingType: "accommodation",
     guestName: "Dr. Meenakshi Joshi",
+    guestAge: 35,
     phone: "9422054321",
+    altPhone: "9422087654",
+    address: "45 Health Quarters, Mumbai, Maharashtra 400001",
     email: "dr.m.joshi@health-dept.demo",
+    otherGuests: [
+      { name: "Dr. Rajesh Joshi", age: 37 },
+      { name: "Priya Joshi", age: 8 }
+    ],
     cottageId: "cottage-5",
-    cottageName: "Cottage 5 — Narmada Niwas",
+    cottageName: "OPEN-AIR PAVILION",
     checkIn: "2026-10-05",
     checkOut: "2026-10-08",
     guestsCount: 3,
     cottageCount: 1,
     meals: "All Meals (Bhojanalaya Full Board)",
     specialRequest: "Official visit for district health camp. Need quiet work desk.",
-    status: "Confirmed"
+    status: "Confirmed",
+    payment: {
+      totalAmount: 7800,
+      advanceAmount: 3000,
+      remainingAmount: 4800,
+      status: "Advance Paid (Demo)",
+      method: "UPI (Demo Integration)",
+      referenceId: "DEMO-UPI-102002"
+    }
   },
   {
     id: "BK-2026-103",
     createdAt: "2026-09-27 10:00",
+    bookingType: "accommodation",
     guestName: "Sunita & Arvind Sharma",
+    guestAge: 45,
     phone: "9823011223",
+    altPhone: "9823044556",
+    address: "78 Station Road, Nashik, Maharashtra 422001",
     email: "sharma.family@sample.com",
+    otherGuests: [
+      { name: "Arvind Sharma", age: 47 },
+      { name: "Rohit Sharma", age: 12 },
+      { name: "Anita Sharma", age: 70 }
+    ],
     cottageId: "cottage-3",
-    cottageName: "Cottage 3 — Krishna Niwas",
+    cottageName: "A3",
     checkIn: "2026-10-12",
     checkOut: "2026-10-15",
     guestsCount: 4,
     cottageCount: 1,
     meals: "Breakfast Only",
     specialRequest: "Need ground floor accessibility for elderly parents.",
-    status: "Confirmed"
+    status: "Confirmed",
+    payment: {
+      totalAmount: 7200,
+      advanceAmount: 2000,
+      remainingAmount: 5200,
+      status: "Advance Paid (Demo)",
+      method: "Card (Demo Integration)",
+      referenceId: "DEMO-CARD-103003"
+    }
   }
 ];
 
@@ -287,7 +368,7 @@ export const propertyFacilities = [
 export const galleryItems = [
   {
     id: "g-1",
-    title: "Cottage 1 & 2 Garden Frontage",
+    title: "Cottage A1 & A2 Garden Frontage",
     category: "Campus View",
     thumb: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
     full: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=85",
@@ -299,7 +380,7 @@ export const galleryItems = [
     category: "Interior",
     thumb: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
     full: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=85",
-    caption: "Hygienic cotton bedding and ample ventilation inside Cottage 2."
+    caption: "Hygienic cotton bedding and ample ventilation inside A2."
   },
   {
     id: "g-3",
@@ -311,11 +392,11 @@ export const galleryItems = [
   },
   {
     id: "g-4",
-    title: "Family Cottage 3 Living Area",
+    title: "Family Cottage A3 Living Area",
     category: "Cottages",
     thumb: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80",
     full: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1600&q=85",
-    caption: "Generous layout with space for extra bedding in Cottage 3."
+    caption: "Generous layout with space for extra bedding in A3."
   },
   {
     id: "g-5",

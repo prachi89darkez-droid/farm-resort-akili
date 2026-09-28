@@ -1,28 +1,30 @@
 /**
  * ==========================================================================
- * LuxeStay Atithi Niwas - Data Store & State Service
- * Upgraded: Standard Date-Based Availability Engine
+ * FARM RESORT. AKILI - Data Store & State Service
+ * Upgraded: Date-Based Availability Engine + Hall Support + Payment
  * ==========================================================================
  * 
  * ARCHITECTURE NOTE:
- * Cottages are NOT locked as permanently "Booked" for all time.
- * Instead, live availability is calculated dynamically per requested date range
- * by evaluating all active (Confirmed or Pending) bookings against the standard
- * date overlap formula:
+ * Accommodations (cottages + pavilion) and Function Hall are NOT locked
+ * as permanently "Booked". Instead, live availability is calculated
+ * dynamically per requested date range by evaluating all active
+ * (Confirmed or Pending) bookings against the standard date overlap formula:
  * 
  *   requestedCheckIn < existingCheckOut AND requestedCheckOut > existingCheckIn
  * 
  * Cancelled bookings do NOT block availability.
- * When switching to a real backend (Node.js, Supabase, PostgreSQL), only the
+ * When switching to a real backend (Supabase, PostgreSQL), only the
  * functions in this file will need to be replaced with async API calls.
  */
 
-import { initialCottages, initialMenuData, initialBookingRequests } from './data.js';
+import { initialCottages, initialHalls, initialMenuData, initialBookingRequests } from './data.js';
+import { calculatePayment, processPayment } from './payment.js';
 
 const STORAGE_KEYS = {
-  COTTAGES: 'luxestay_cottages_date_v3',
+  COTTAGES: 'luxestay_cottages_date_v4',
+  HALLS: 'luxestay_halls_date_v4',
   MENU: 'luxestay_menu_date_v3',
-  BOOKINGS: 'luxestay_bookings_date_v3',
+  BOOKINGS: 'luxestay_bookings_date_v4',
   SAVED_COTTAGES: 'luxestay_saved_cottages_date_v3'
 };
 
@@ -45,7 +47,7 @@ export function isDateRangeOverlapping(startA, endA, startB, endB) {
 }
 
 // ==========================================================================
-// 2. Cottages Store
+// 2. Accommodations Store (Cottages + Pavilion)
 // ==========================================================================
 
 export function getCottages() {
@@ -66,6 +68,31 @@ export function saveCottages(cottages) {
     localStorage.setItem(STORAGE_KEYS.COTTAGES, JSON.stringify(cottages));
   } catch (err) {
     console.error('Failed to save cottages to localStorage', err);
+  }
+}
+
+// ==========================================================================
+// 2b. Function Halls Store
+// ==========================================================================
+
+export function getHalls() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.HALLS);
+    if (raw) {
+      return JSON.parse(raw);
+    }
+  } catch (err) {
+    console.warn('Could not read halls from localStorage', err);
+  }
+  saveHalls(initialHalls);
+  return [...initialHalls];
+}
+
+export function saveHalls(halls) {
+  try {
+    localStorage.setItem(STORAGE_KEYS.HALLS, JSON.stringify(halls));
+  } catch (err) {
+    console.error('Failed to save halls to localStorage', err);
   }
 }
 
@@ -95,17 +122,17 @@ export function saveBookings(bookings) {
 }
 
 /**
- * Checks if a specific cottage is available for a requested checkIn -> checkOut date range.
+ * Checks if a specific unit (cottage or hall) is available for a requested
+ * checkIn -> checkOut date range.
  * Considers bookings with status === 'Confirmed' or status === 'Pending'.
  * Bookings with status === 'Cancelled' are ignored.
  */
-export function isCottageAvailableForDates(cottageId, requestedCheckIn, requestedCheckOut, excludeBookingId = null) {
+export function isUnitAvailableForDates(unitId, requestedCheckIn, requestedCheckOut, excludeBookingId = null) {
   const bookings = getBookings();
 
-  // Find any active overlapping bookings for this cottage
   const conflictingBookings = bookings.filter(b => {
-    if (b.cottageId !== cottageId) return false;
-    if (b.status === 'Cancelled') return false; // Cancelled does NOT block dates!
+    if (b.cottageId !== unitId) return false;
+    if (b.status === 'Cancelled') return false;
     if (excludeBookingId && b.id === excludeBookingId) return false;
 
     return isDateRangeOverlapping(requestedCheckIn, requestedCheckOut, b.checkIn, b.checkOut);
@@ -117,14 +144,18 @@ export function isCottageAvailableForDates(cottageId, requestedCheckIn, requeste
   };
 }
 
+// Keep the old name as an alias for backward compatibility
+export const isCottageAvailableForDates = isUnitAvailableForDates;
+
 /**
- * Calculates availability for ALL 5 cottages for a specified date range.
+ * Calculates availability for ALL accommodations (cottages + pavilion)
+ * for a specified date range.
  */
 export function getAvailabilityForDateRange(checkIn, checkOut) {
   const cottages = getCottages();
 
   const cottagesWithStatus = cottages.map(cottage => {
-    const check = isCottageAvailableForDates(cottage.id, checkIn, checkOut);
+    const check = isUnitAvailableForDates(cottage.id, checkIn, checkOut);
     return {
       ...cottage,
       isAvailableForDates: check.available,
@@ -138,7 +169,7 @@ export function getAvailabilityForDateRange(checkIn, checkOut) {
   return {
     checkIn,
     checkOut,
-    total: cottagesWithStatus.length, // Exactly 5
+    total: cottagesWithStatus.length,
     availableCount,
     bookedCount,
     cottages: cottagesWithStatus
@@ -146,22 +177,78 @@ export function getAvailabilityForDateRange(checkIn, checkOut) {
 }
 
 /**
+ * Calculates availability for ALL function halls for a specified date range.
+ */
+export function getHallAvailabilityForDateRange(checkIn, checkOut) {
+  const halls = getHalls();
+
+  const hallsWithStatus = halls.map(hall => {
+    const check = isUnitAvailableForDates(hall.id, checkIn, checkOut);
+    return {
+      ...hall,
+      isAvailableForDates: check.available,
+      conflicts: check.conflictingBookings
+    };
+  });
+
+  return {
+    checkIn,
+    checkOut,
+    total: hallsWithStatus.length,
+    availableCount: hallsWithStatus.filter(h => h.isAvailableForDates).length,
+    bookedCount: hallsWithStatus.filter(h => !h.isAvailableForDates).length,
+    halls: hallsWithStatus
+  };
+}
+
+/**
  * Creates a new booking request after validating date availability.
+ * Supports both accommodation and hall bookings with expanded guest
+ * details and payment information.
  */
 export function createBookingRequest(formData) {
-  const { cottageId, checkIn, checkOut } = formData;
+  const { cottageId, checkIn, checkOut, bookingType } = formData;
 
   // 1. Rigorous Date-Overlap Availability Check
-  const check = isCottageAvailableForDates(cottageId, checkIn, checkOut);
+  const check = isUnitAvailableForDates(cottageId, checkIn, checkOut);
   if (!check.available) {
     const firstConflict = check.conflictingBookings[0];
     return {
       success: false,
-      error: `Conflict: This cottage is already reserved from ${firstConflict.checkIn} to ${firstConflict.checkOut} (${firstConflict.status}).`
+      error: `Conflict: This ${bookingType === 'hall' ? 'hall' : 'unit'} is already reserved from ${firstConflict.checkIn} to ${firstConflict.checkOut} (${firstConflict.status}).`
     };
   }
 
-  // 2. Generate Booking
+  // 2. Calculate payment
+  const isHall = bookingType === 'hall';
+  const units = isHall ? getHalls() : getCottages();
+  const selectedUnit = units.find(u => u.id === cottageId);
+  if (!selectedUnit) {
+    return { success: false, error: 'Selected unit not found.' };
+  }
+
+  const d1 = new Date(checkIn);
+  const d2 = new Date(checkOut);
+  const numberOfPeriods = Math.max(1, Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)));
+
+  const ratePerPeriod = isHall ? selectedUnit.pricePerDay : selectedUnit.pricePerNight;
+  const paymentCalc = calculatePayment(ratePerPeriod, numberOfPeriods);
+
+  // 3. Process payment (demo mode — no real money collected)
+  const paymentResult = processPayment(paymentCalc.advanceAmount, formData.paymentMethod);
+
+  // 4. Build payment object for storage
+  const payment = {
+    totalAmount: paymentCalc.totalAmount,
+    advanceAmount: paymentCalc.advanceAmount,
+    remainingAmount: paymentCalc.remainingAmount,
+    status: paymentResult.status,
+    method: paymentResult.method,
+    referenceId: paymentResult.referenceId,
+    isDemo: paymentResult.isDemo
+  };
+
+  // 5. Generate Booking
   const bookings = getBookings();
   const randomSuffix = Math.floor(1000 + Math.random() * 9000);
   const now = new Date();
@@ -170,9 +257,14 @@ export function createBookingRequest(formData) {
   const newBooking = {
     id: `BK-2026-${randomSuffix}`,
     createdAt: dateStr,
+    bookingType: bookingType || 'accommodation',
     guestName: formData.guestName.trim(),
+    guestAge: parseInt(formData.guestAge, 10) || null,
     phone: formData.phone.trim(),
+    altPhone: formData.altPhone ? formData.altPhone.trim() : 'N/A',
+    address: formData.address ? formData.address.trim() : 'N/A',
     email: formData.email ? formData.email.trim() : 'N/A',
+    otherGuests: formData.otherGuests || [],
     cottageId: formData.cottageId,
     cottageName: formData.cottageName,
     checkIn: formData.checkIn,
@@ -181,7 +273,8 @@ export function createBookingRequest(formData) {
     cottageCount: parseInt(formData.cottageCount, 10) || 1,
     meals: formData.meals || 'No Meals',
     specialRequest: formData.specialRequest ? formData.specialRequest.trim() : 'None',
-    status: 'Pending' // "Pending" | "Confirmed" | "Cancelled"
+    status: 'Pending',
+    payment
   };
 
   bookings.unshift(newBooking);
@@ -195,7 +288,7 @@ export function createBookingRequest(formData) {
 
 /**
  * Updates a booking's status between "Pending", "Confirmed", and "Cancelled".
- * If marked as "Cancelled", the cottage dates are immediately freed up!
+ * If marked as "Cancelled", the unit dates are immediately freed up!
  */
 export function updateBookingStatus(bookingId, newStatus) {
   const bookings = getBookings();
@@ -268,6 +361,7 @@ export function toggleSaveCottage(cottageId) {
 
 export function resetAllDataToDefault() {
   saveCottages(initialCottages);
+  saveHalls(initialHalls);
   saveMenuData(initialMenuData);
   saveBookings(initialBookingRequests);
   try {
