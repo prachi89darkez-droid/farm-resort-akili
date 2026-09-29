@@ -4,39 +4,39 @@
    ========================================================================== */
 
 :root {
-  /* --- Brand Colors (Light Warm Alabaster, Crisp White & Refined Gold) --- */
-  --color-bg: #FAF8F5;                     /* Warm Alabaster / Soft Linen (Main Canvas) */
-  --color-bg-alt: #F3EFE9;                 /* Subtly warmer tone for alternating sections */
-  --color-surface: #FFFFFF;                /* Pure Crisp White (Cards, Dropdowns, Modals) */
-  --color-surface-hover: #FCFBFA;          /* Subtle hover state for cards */
-  
-  /* Light Glassmorphism */
+  /* --- Brand Colors: Olive Green + Warm Cream --- */
+  --color-bg: #F7F5EE;
+  --color-bg-alt: #EEF0E5;
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #F8F9F4;
+
+  /* Soft Glass Effect */
   --color-surface-glass: rgba(255, 255, 255, 0.94);
-  --color-surface-glass-border: rgba(165, 131, 56, 0.22);
-  --color-surface-glass-shadow: 0 10px 30px rgba(28, 34, 41, 0.06);
+  --color-surface-glass-border: rgba(82, 96, 49, 0.22);
+  --color-surface-glass-shadow: 0 10px 30px rgba(43, 52, 32, 0.07);
 
-  /* Gold & Champagne Accents (Formal, Understated & Refined) */
-  --color-gold: #9E7D3B;                   /* Formal Antique Gold */
-  --color-gold-light: #B8964C;             /* Hover Gold */
-  --color-gold-dark: #7F632C;              /* Active / Pressed Gold */
-  --color-gold-soft: #F6F1E6;              /* Soft Warm Champagne Background Tint */
-  --color-gold-glow: rgba(158, 125, 59, 0.12);
+  /* Olive Green Accents */
+  --color-gold: #657344;
+  --color-gold-light: #7D8B58;
+  --color-gold-dark: #4D5A32;
+  --color-gold-soft: #E9EDDD;
+  --color-gold-glow: rgba(101, 115, 68, 0.14);
 
-  /* Formal Typography Colors (High contrast, clean readability) */
-  --color-text-primary: #1C2229;           /* Deep Charcoal Slate (Main Headings & Titles) */
-  --color-text-secondary: #4D5763;         /* Balanced Slate (Body text & descriptions) */
-  --color-text-muted: #7E8B97;             /* Subtle metadata, dates & secondary labels */
-  --color-text-gold: #8E6F32;              /* Warm text highlight */
+  /* Typography */
+  --color-text-primary: #263021;
+  --color-text-secondary: #505A4A;
+  --color-text-muted: #7B8373;
+  --color-text-gold: #5D6B3D;
 
-  /* Clean Borders */
-  --color-border: #E8E3DA;                 /* Standard subtle card/divider border */
-  --color-border-subtle: #F0ECE4;          /* Ultra light line */
-  --color-border-gold: rgba(158, 125, 59, 0.35);
+  /* Borders */
+  --color-border: #DDE1D3;
+  --color-border-subtle: #ECEEE7;
+  --color-border-gold: rgba(101, 115, 68, 0.35);
 
   /* Functional Colors */
-  --color-success: #2A9D8F;
-  --color-available: #2E7D32;
-  --color-few-left: #C85A32;
+  --color-success: #3F7D45;
+  --color-available: #3F7D45;
+  --color-few-left: #B56A3C;
 
   /* --- Typography --- */
   --font-serif: 'Cormorant Garamond', Garamond, 'Playfair Display', Georgia, serif;
@@ -50,15 +50,15 @@
   --fw-bold: 700;
 
   /* --- Spacing Scale --- */
-  --space-2xs: 0.25rem;  /* 4px */
-  --space-xs: 0.5rem;    /* 8px */
-  --space-sm: 0.75rem;   /* 12px */
-  --space-md: 1rem;      /* 16px */
-  --space-lg: 1.5rem;    /* 24px */
-  --space-xl: 2rem;      /* 32px */
-  --space-2xl: 3rem;     /* 48px */
-  --space-3xl: 4.5rem;   /* 72px */
-  --space-4xl: 6rem;     /* 96px */
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4.5rem;
+  --space-4xl: 6rem;
 
   /* --- Border Radius --- */
   --radius-xs: 2px;
@@ -68,11 +68,11 @@
   --radius-full: 9999px;
 
   /* --- Natural Soft Shadows --- */
-  --shadow-subtle: 0 2px 10px rgba(28, 34, 41, 0.04);
-  --shadow-card: 0 8px 25px rgba(28, 34, 41, 0.05);
-  --shadow-hover: 0 16px 36px rgba(28, 34, 41, 0.09);
-  --shadow-nav: 0 4px 20px rgba(28, 34, 41, 0.04);
-  --shadow-modal: 0 20px 50px rgba(28, 34, 41, 0.18);
+  --shadow-subtle: 0 2px 10px rgba(38, 48, 33, 0.04);
+  --shadow-card: 0 8px 25px rgba(38, 48, 33, 0.05);
+  --shadow-hover: 0 16px 36px rgba(38, 48, 33, 0.09);
+  --shadow-nav: 0 4px 20px rgba(38, 48, 33, 0.05);
+  --shadow-modal: 0 20px 50px rgba(38, 48, 33, 0.18);
 
   /* --- Transitions --- */
   --transition-fast: 0.18s ease;
@@ -82,3 +82,4 @@
   --container-max-width: 1240px;
   --header-height: 84px;
 }
+
