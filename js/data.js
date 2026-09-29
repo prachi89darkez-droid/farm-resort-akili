@@ -1,7 +1,7 @@
 /**
  * ==========================================================================
- * FARM RESORT. AKILI - Core Data Models
- * Gram Panchayat Community Hospitality Project
+ * Gram Swaraj Resorts & Banquets - Core Data Models
+ * Chandiput GP Community Hospitality Project
  * ==========================================================================
  * 
  * CORE PROPERTY SPECIFICATION:
@@ -13,16 +13,16 @@
  */
 
 export const propertyInfo = {
-  name: "FARM RESORT. AKILI",
-  governingBody: "Gram Panchayat Tourism & Hospitality Committee",
+  name: "Gram Swaraj Resorts & Banquets",
+  governingBody: "Chandiput GP",
   tagline: "Community-Managed Hospitality Project",
   totalAccommodations: 5,
   currency: "₹",
-  address: "Gram Panchayat Tourism Complex, Near Main Block Office, State Highway 14",
-  district: "Sample District, Maharashtra (Demonstration Placeholder)",
-  helpline: "+91 98220 XXXXX",
-  officePhone: "+91 2140 XXXXX",
-  email: "panchayat.stay@demo.gov.in",
+  address: "Akili, NH 326-A, Block - Mohana, District - Gajapati",
+  district: "District - Gajapati",
+  helpline: "06816256550",
+  officePhone: "06816256550",
+  email: "chandiputgp2025@gmail.com",
   checkInTime: "12:00 PM (Noon)",
   checkOutTime: "11:00 AM",
   cancellationPolicy: "Advance cancellation notice of 48 hours required for full refund."
@@ -37,7 +37,7 @@ export const initialCottages = [
     id: "cottage-1",
     number: 1,
     type: "cottage",
-    name: "A1",
+    name: "Akili Cottage A1",
     tagline: "Air-conditioned double cottage with front garden verandah",
     maxGuests: 3,
     bedInfo: "1 Queen Bed + 1 Single Diwan Bed",
@@ -51,13 +51,13 @@ export const initialCottages = [
       "32-inch LED TV with DTH",
       "Daily Housekeeping"
     ],
-    description: "A1 is located near the main entrance grove. Features cool stone flooring, quiet garden facing seating, and hot water supply 24/7."
+    description: "Akili Cottage A1 is located near the main entrance grove. Features cool stone flooring, quiet garden facing seating, and hot water supply 24/7."
   },
   {
     id: "cottage-2",
     number: 2,
     type: "cottage",
-    name: "A2",
+    name: "Akili Cottage A2",
     tagline: "Comfortable air-conditioned cottage overlooking flowering lawns",
     maxGuests: 3,
     bedInfo: "1 Queen Bed + 1 Single Diwan Bed",
@@ -71,13 +71,13 @@ export const initialCottages = [
       "Clean Bed Linen & Towels",
       "Wardrobe & Luggage Stand"
     ],
-    description: "A2 offers peaceful natural ventilation and cross-breeze. Ideal for small families or official visitors."
+    description: "Akili Cottage A2 offers peaceful natural ventilation and cross-breeze. Ideal for small families or official visitors."
   },
   {
     id: "cottage-3",
     number: 3,
     type: "cottage",
-    name: "A3",
+    name: "Akili Cottage A3",
     tagline: "Spacious multi-bed family cottage with living area",
     maxGuests: 5,
     bedInfo: "2 Double Beds + Extra Rollaway Mattress",
@@ -97,7 +97,7 @@ export const initialCottages = [
     id: "cottage-4",
     number: 4,
     type: "cottage",
-    name: "A4",
+    name: "Akili Cottage A4",
     tagline: "Standard non-AC eco cottage with natural stone cooling",
     maxGuests: 2,
     bedInfo: "1 Queen Bed",
@@ -117,7 +117,7 @@ export const initialCottages = [
     id: "cottage-5",
     number: 5,
     type: "pavilion",
-    name: "OPEN-AIR PAVILION",
+    name: "Open-Air Pavilion",
     tagline: "Premium open-air pavilion with meeting desk and quiet corner setting",
     maxGuests: 4,
     bedInfo: "1 King Bed + 1 Queen Bed (Two Rooms)",
@@ -145,7 +145,7 @@ export const initialHalls = [
     number: 1,
     type: "hall",
     name: "Suva Mandap (Function Hall), Chandiput",
-    tagline: "2,000 sq ft function hall for events, ceremonies, and gatherings",
+    tagline: "2,000 sq ft function hall in Chandiput for events, ceremonies, and gatherings",
     maxGuests: 200,
     area: "2,000 sq ft",
     pricePerDay: 5000,
@@ -180,7 +180,7 @@ export const initialBookingRequests = [
       { name: "Sunita Shinde", age: 38 }
     ],
     cottageId: "cottage-2",
-    cottageName: "A2",
+    cottageName: "Akili Cottage A2",
     checkIn: "2026-10-01",
     checkOut: "2026-10-04",
     guestsCount: 2,
@@ -212,7 +212,7 @@ export const initialBookingRequests = [
       { name: "Priya Joshi", age: 8 }
     ],
     cottageId: "cottage-5",
-    cottageName: "OPEN-AIR PAVILION",
+    cottageName: "Open-Air Pavilion",
     checkIn: "2026-10-05",
     checkOut: "2026-10-08",
     guestsCount: 3,
@@ -245,7 +245,7 @@ export const initialBookingRequests = [
       { name: "Anita Sharma", age: 70 }
     ],
     cottageId: "cottage-3",
-    cottageName: "A3",
+    cottageName: "Akili Cottage A3",
     checkIn: "2026-10-12",
     checkOut: "2026-10-15",
     guestsCount: 4,
@@ -368,7 +368,7 @@ export const propertyFacilities = [
 export const galleryItems = [
   {
     id: "g-1",
-    title: "Cottage A1 & A2 Garden Frontage",
+    title: "Akili Cottage A1 & A2 Garden Frontage",
     category: "Campus View",
     thumb: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
     full: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=85",
@@ -380,7 +380,7 @@ export const galleryItems = [
     category: "Interior",
     thumb: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
     full: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=85",
-    caption: "Hygienic cotton bedding and ample ventilation inside A2."
+    caption: "Hygienic cotton bedding and ample ventilation inside Akili Cottage A2."
   },
   {
     id: "g-3",
@@ -396,7 +396,7 @@ export const galleryItems = [
     category: "Cottages",
     thumb: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80",
     full: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1600&q=85",
-    caption: "Generous layout with space for extra bedding in A3."
+    caption: "Generous layout with space for extra bedding in Akili Cottage A3."
   },
   {
     id: "g-5",

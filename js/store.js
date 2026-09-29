@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * FARM RESORT. AKILI - Data Store & State Service
+ * Gram Swaraj Resorts & Banquets - Data Store & State Service
  * Upgraded: Date-Based Availability Engine + Hall Support + Payment
  * ==========================================================================
  * 

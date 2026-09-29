@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * LuxeStay Atithi Niwas - Public Application Logic
+ * Gram Swaraj Resorts & Banquets - Public Application Logic
  * Upgraded: Standard Date-Based Availability Engine
  * ==========================================================================
  */

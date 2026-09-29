@@ -1,6 +1,6 @@
 /**
  * ==========================================================================
- * FARM RESORT. AKILI - Booking Receipt Generator
+ * Gram Swaraj Resorts & Banquets - Booking Receipt Generator
  * ==========================================================================
  * 
  * Generates a professional, printable booking receipt after a successful
@@ -51,9 +51,9 @@ export function generateReceipt(booking, unit, numberOfPeriods) {
             </svg>
           </span>
           <div>
-            <h2>FARM RESORT. AKILI</h2>
-            <p>Gram Panchayat Tourism Complex, Near Main Block Office, State Highway 14</p>
-            <p>Helpline: +91 98220 XXXXX &bull; Email: panchayat.stay@demo.gov.in</p>
+            <h2>Gram Swaraj Resorts &amp; Banquets</h2>
+            <p>Akili, NH 326-A, Block - Mohana, District - Gajapati</p>
+            <p>Helpline: 06816256550 &bull; Email: chandiputgp2025@gmail.com</p>
           </div>
         </div>
         <div class="receipt-title-box">
@@ -211,7 +211,7 @@ export function generateReceipt(booking, unit, numberOfPeriods) {
       </div>
 
       <div class="receipt-footer">
-        <p>&copy; 2026 FARM RESORT. AKILI &bull; Gram Panchayat Tourism Project</p>
+        <p>&copy; 2026 Gram Swaraj Resorts &amp; Banquets &bull; Chandiput GP</p>
         <p class="receipt-disclaimer">${payment.isDemo ? 'Payment processed via DEMO integration. No real money has been collected.' : ''}</p>
       </div>
 
