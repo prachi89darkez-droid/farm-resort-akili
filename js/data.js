@@ -149,7 +149,7 @@ export const initialHalls = [
     maxGuests: 200,
     area: "2,000 sq ft",
     pricePerDay: 5000,
-    image: "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80",
+    image: "suva mandap.jpeg",
     facilities: [
       "2,000 sq ft Open Floor Space",
       "Stage Platform for Ceremonies",
