@@ -62,7 +62,7 @@ export const initialCottages = [
     maxGuests: 3,
     bedInfo: "1 Queen Bed + 1 Single Diwan Bed",
     pricePerNight: 1800,
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1200&q=80",
+    image: "a1.jpeg",
     facilities: [
       "Split Air Conditioner & Fan",
       "Attached Western Bathroom with Geyser",
@@ -82,7 +82,7 @@ export const initialCottages = [
     maxGuests: 5,
     bedInfo: "2 Double Beds + Extra Rollaway Mattress",
     pricePerNight: 2400,
-    image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1200&q=80",
+    image: "a1.jpeg",
     facilities: [
       "2 Split Air Conditioners",
       "Large Attached Bathroom with Solar/Electric Geyser",
@@ -102,7 +102,7 @@ export const initialCottages = [
     maxGuests: 2,
     bedInfo: "1 Queen Bed",
     pricePerNight: 1400,
-    image: "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1200&q=80",
+    image: "a1.jpeg",
     facilities: [
       "High-Speed Ceiling Fans & Mesh Windows",
       "Attached Bathroom with Hot Water Geyser",
@@ -150,15 +150,20 @@ export const initialHalls = [
     area: "2,000 sq ft",
     pricePerDay: 5000,
     image: "suva mandap.jpeg",
-    facilities: [
-      "2,000 sq ft Open Floor Space",
-      "Stage Platform for Ceremonies",
-      "Separate Kitchen & Pantry Area",
-      "Adequate Lighting & Ceiling Fans",
-      "Generator Power Backup",
-      "Dedicated Parking for Guests"
-    ],
-    description: "Suva Mandap is a spacious 2,000 sq ft function hall in Chandiput, ideal for weddings, community events, official meetings, and ceremonies. Booked on a per-day basis."
+   facilities: [
+  "Spacious and Elegant Hall",
+  "Engagements & Marriage Functions",
+  "Birthday Parties",
+  "Cultural Events",
+  "Community Events",
+  "Toilets",
+  "Lamps & Lighting",
+  "Dining Area",
+  "Spacious Parking",
+  "Clean & Comfortable Environment"
+],
+description: "Suva Mandap is a spacious and comfortable 2,000 sq ft function hall in Chandiput, suitable for engagements, marriage functions, birthday parties, cultural events, community events, and other gatherings."                                                                                                            
+   
   }
 ];
 
