@@ -227,6 +227,7 @@ export function evaluateDateAvailability() {
 
   // Render 5 Cottages Catalog
   renderCottagesCatalog(result.cottages);
+  renderHallsCatalog();
 
   // Update Booking Form Dropdown with available options
   populateBookingCottageDropdown(result.cottages);
