@@ -406,7 +406,7 @@ function renderHallsCatalog() {
   const halls = getHalls();
 
   container.innerHTML = halls.map(h => `
-    <article class="room-card">
+    <article class="room-card hall-room-card">
       <div class="room-card-image-box">
         <img
           src="${h.image}"
