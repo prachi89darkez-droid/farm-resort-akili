@@ -399,8 +399,8 @@ full: "clean-ac-bedroom.jpg",
     id: "g-4",
     title: "Family Cottage A3 Living Area",
     category: "Cottages",
-    thumb: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=800&q=80",
-    full: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1600&q=85",
+    thumb: "a3-living-area.jpg",
+full: "a3-living-area.jpg",
     caption: "Generous layout with space for extra bedding in Akili Cottage A3."
   },
   {
