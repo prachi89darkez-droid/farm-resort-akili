@@ -42,7 +42,7 @@ export const initialCottages = [
     maxGuests: 3,
     bedInfo: "1 Queen Bed + 1 Single Diwan Bed",
     pricePerNight: 1800,
-    image: "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1200&q=80",
+    image: "a1.jpeg",
     facilities: [
       "Split Air Conditioner & Fan",
       "Attached Western Bathroom with Geyser",
