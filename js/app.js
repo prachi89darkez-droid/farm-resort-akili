@@ -399,6 +399,77 @@ function renderCottagesCatalog(cottages) {
   });
 }
 
+function renderHallsCatalog() {
+  const container = document.getElementById('halls-grid');
+  if (!container) return;
+
+  const halls = getHalls();
+
+  container.innerHTML = halls.map(h => `
+    <article class="room-card">
+      <div class="room-card-image-box">
+        <img
+          src="${h.image}"
+          alt="${h.name}"
+          class="room-card-image"
+          loading="lazy"
+        />
+      </div>
+
+      <div class="room-card-body">
+        <div class="room-category-meta">
+          <span>Function Hall</span>
+          <span>👥 Up to ${h.maxGuests} Guests</span>
+        </div>
+
+        <h3 class="room-card-title">${h.name}</h3>
+
+        <p class="room-card-tagline">${h.tagline}</p>
+
+        <div class="room-specs-strip">
+          <div class="room-spec-item">
+            <span>📐</span>
+            <span>${h.area}</span>
+          </div>
+
+          <div class="room-spec-item">
+            <span>💰</span>
+            <span>${formatINR(h.pricePerDay)}/day</span>
+          </div>
+        </div>
+
+        <div class="modal-amenities-box">
+          <h4 class="modal-section-heading">Facilities & Uses</h4>
+
+          <div class="modal-amenities-grid">
+            ${h.facilities.map(fac => `
+              <div class="modal-amenity-item">
+                <span class="modal-amenity-check">✓</span>
+                <span>${fac}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="room-card-footer">
+          <div class="room-price-box">
+            <span class="room-price-val">${formatINR(h.pricePerDay)}</span>
+            <span class="room-price-period">per day</span>
+          </div>
+
+          <button
+            type="button"
+            class="btn btn-primary btn-sm"
+            onclick="document.getElementById('book-type').value='hall'; document.getElementById('book-type').dispatchEvent(new Event('change')); document.getElementById('booking-section').scrollIntoView({behavior:'smooth', block:'start'});"
+          >
+            Make a Reservation
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join('');
+}
+
 function updateSavedBadges() {
   const saved = getSavedCottages();
   const count = saved.length;
