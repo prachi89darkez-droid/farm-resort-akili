@@ -383,8 +383,8 @@ full: "a1-a2-garden.jpg",
     id: "g-2",
     title: "Clean Air-Conditioned Bedroom",
     category: "Interior",
-    thumb: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80",
-    full: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=85",
+   thumb: "clean-ac-bedroom.jpg",
+full: "clean-ac-bedroom.jpg",
     caption: "Hygienic cotton bedding and ample ventilation inside Akili Cottage A2."
   },
   {
