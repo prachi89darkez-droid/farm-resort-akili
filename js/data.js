@@ -375,8 +375,8 @@ export const galleryItems = [
     id: "g-1",
     title: "Akili Cottage A1 & A2 Garden Frontage",
     category: "Campus View",
-    thumb: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80",
-    full: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=85",
+    thumb: "a1-a2-garden.jpg",
+full: "a1-a2-garden.jpg",
     caption: "The landscaped lawn and paved pathways connecting the cottages."
   },
   {
